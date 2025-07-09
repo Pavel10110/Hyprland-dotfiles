@@ -1,0 +1,43 @@
+@import "/home/archyper/.cache/wal/colors-waybar.css";
+
+* {
+  font-family: Hack Nerd Font Propo;
+  font-size: 14px;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+#waybar {
+  padding: 0px;
+  margin: 0px;
+}
+
+
+window#waybar {
+   background: transparent;
+}
+
+/*-----module groups----*/
+/*-----modules indv----*/
+#workspaces button {
+  padding: 0px 5px;
+  background-color: transparent;
+  font-weight: bold;
+}
+#clock, 
+#custom-temp,
+#cpu,
+#memory,
+#tray,
+#pulseaudio,
+#custom-button {
+  padding: 0px 10px;
+  margin: 0px 2px;
+  border-radius: 16px; /* skruglenie */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: @background;
+  color: @foreground;
+  font-weight: bold;
+}
+

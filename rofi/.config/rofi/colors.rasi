@@ -1,0 +1,5 @@
+@import "/home/archyper/.cache/wal/colors-rofi-dark.rasi"
+
+entry{
+  background-color: green;
+}

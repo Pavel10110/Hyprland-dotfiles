@@ -1,0 +1,156 @@
+//@import "/home/archyper/.cache/wal/colors-rofi-dark.rasi"
+configuration {
+  sidebar-mode: true;
+  modi:   "window,run,drun";
+  drun-display-format:      "{name}";  
+  display-drun:             "  ";               // DRUN mode prompt
+  display-run:              "  ";               // RUN mode prompt
+  display-window:          "  "; 
+  sidebar-mode:             false;              // Show sidebar with modes
+  lines:                    1;                 // Number of lines to show
+}
+
+@theme "/dev/null"
+
+//@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
+//@theme "default"
+
+* {
+  border-color: yellow;
+  // alternate-normal-background: purple;
+  // background:                  red;
+  font:   "Hack Nerd Font Mono 12";
+  text-color: white;
+}
+window{
+
+  background-color: transparent;
+  //margin:     20px;
+  border-radius: 30px;
+  width: 600px;
+  border:0px;
+
+}
+
+
+overlay{}
+mainbox {
+
+
+  background-color: purple;
+  border-radius: 30px;
+  children: [inputbar, listview];
+}
+
+inputbar {
+
+  //background-color: gray;
+//  background-image: url("/home/archyper/Pictures/wallpapers/wallhaven-4lkv5p_2560x1440.png", width);
+   background-image: url("/home/archyper/Pictures/wallpapers/wallhaven-4lkv5p_2560x1440.png", width);
+  padding:    100px 20px 80px 20px;
+   border-radius: 30px 30px 0px 0px;
+  children: [entry, mode-switcher];
+  spacing: 30px;
+
+}
+
+promt {
+}
+
+entry { // input field
+
+  font:   "Hack Nerd Font 14";
+  placeholder: " Search";
+  vertical-align: 0.5; //make text in the middle of its' window
+  blink: false;
+  hide-cursor-on-empty: true;
+  expand: true;
+  background-color: orange;
+  border-radius:30px;
+ padding:     12px;
+}
+
+mode-switcher{
+  spacing: 10px;
+  background-color: transparent;
+
+}
+button {
+
+  font:   "Hack Nerd Font Mono 20";
+  border-radius: 30px;
+ padding:     inherit;
+ // padding:    8px 12px;
+ // min-height: 36px;
+  horizontal-align: 0.5;
+  vertical-align: 0.5;
+  line-height: 1.0;
+  background-color: orange;
+}
+
+button.selected {
+  background-color: red;
+
+}
+
+
+
+
+message {
+}
+textbox {
+}
+
+
+
+
+
+textbox-prompt-colon {}
+
+listview {
+  scrollbar: false;  // Explicitly disable scrollbar
+  background-color: transparent;
+  padding:    15px;
+  //margin:     5px;
+  border-radius:30px;
+  border:0px;
+  lines: 6;
+  spacing: 5px;
+} 
+
+element {
+
+  orientation: horizontal ;
+  children: [ element-text ];
+  border-radius:20px;
+  padding:    5px;
+  background-color: transparent;
+
+}
+element.selected{
+
+  background-color: blue;
+}
+element-text{
+  //background-color: green;
+  vertical-align: 0.5; //make text in the middle of its' window
+//  horizontal-align: 0.5; //make text in the middle of its' window
+  text-color: white ;
+  padding: 6px;
+
+  background-color: transparent;
+}
+element-text.selected{
+  background-color: blue;
+}
+element-icon {
+  //size: 2em;
+  //   background-color: green;
+}
+
+scrollbar {
+}
+
+sidebar {
+
+}

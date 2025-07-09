@@ -1,0 +1,161 @@
+//@import "/home/archyper/.cache/wal/colors-rofi-dark.rasi"
+configuration {
+  sidebar-mode: true;
+  modi:   "window,combi,drun,calc";
+  combi-modi: "window,drun,calc";
+  drun-display-format:      "{name}";  
+  display-drun:             "  ";               // DRUN mode prompt
+  display-combi:              "  ";               // RUN mode prompt
+  display-window:          " 󱂬 "; 
+  sidebar-mode:             false;              // Show sidebar with modes
+}
+
+@theme "/dev/null"
+
+@import "/home/archyper/.cache/wal/colors-rofi-dark.rasi"
+* {
+  // alternate-normal-background: purple;
+  // background:                  red;
+  font:   "Hack Nerd Font Mono 12";
+  text-color: @foreground;
+ // blur: true;
+ // blur-background: true;
+ // blur-radius: 10;
+ // blur-xray: false;
+ // blur-background-exclude: [];
+
+}
+window{
+
+  background-color: rgba(0, 0, 0, 0.2);
+  transparency: "real";
+  //margin:     20px;
+  border-radius: 30px;
+  width: 600px;
+  border:0px;
+
+}
+
+
+overlay{}
+
+mainbox {
+  //  background-color: transparent;
+  background-color: transparent;
+  border-radius: 30px;
+  children: [inputbar, listview];
+}
+
+inputbar {
+
+  //background-color: gray;
+  //  background-image: url("/home/archyper/.cache/rofi_wallpaper_small.jpg", width);
+  background-image: url("/home/archyper/.cache/rofi_wallpaper_small.jpg", width);
+  background-color: rgba(0, 0, 0, 0.6);
+  padding:    100px 20px 80px 20px;
+  border-radius: 30px 30px 0px 0px;
+  children: [entry, mode-switcher];
+  spacing: 30px;
+
+}
+
+promt {
+}
+
+entry { // input field
+
+  font:   "Hack Nerd Font 14";
+  placeholder: " Search";
+  vertical-align: 0.5; //make text in the middle of its' window
+  blink: false;
+  hide-cursor-on-empty: true;
+  expand: true;
+  background-color: @color2;
+  border-radius:30px;
+  padding:     12px;
+}
+
+mode-switcher{
+  spacing: 10px;
+  background-color: transparent;
+
+}
+button {
+
+  font:   "Hack Nerd Font Mono 20";
+  border-radius: 30px;
+  padding:     inherit;
+  // padding:    8px 12px;
+  // min-height: 36px;
+  horizontal-align: 0.5;
+  vertical-align: 0.5;
+  line-height: 1.0;
+  background-color: @color2;
+}
+
+button.selected {
+  background-color: @background;
+
+
+}
+
+
+
+
+message {
+}
+textbox {
+}
+
+
+
+
+
+textbox-prompt-colon {}
+
+listview {
+  scrollbar: false;  // Explicitly disable scrollbar
+  background-color: transparent;
+  padding:    15px;
+  //margin:     5px;
+  border-radius:30px;
+  border:0px;
+  lines: 6;
+  spacing: 5px;
+} 
+
+element {
+
+  orientation: horizontal ;
+  children: [ element-text ];
+  border-radius:20px;
+  padding:    5px;
+  background-color: transparent;
+
+}
+element.selected{
+
+  background-color: @color3;
+}
+
+element-text{
+  vertical-align: 0.5; //make text in the middle of its' window
+//    horizontal-align: 0.5; //make text in the middle of its' window
+  padding: 6px;
+
+
+  background-color: transparent;
+}
+element-text.selected{
+  background-color: @color3;
+}
+element-icon {
+  //size: 2em;
+}
+
+scrollbar {
+}
+
+sidebar {
+
+}

@@ -1,0 +1,162 @@
+//@import "/home/archyper/.cache/wal/colors-rofi-dark.rasi"
+configuration {
+  sidebar-mode: true;
+  modi:   "window,run,drun";
+  drun-display-format:      "{name}";  
+  sidebar-mode:             true;              // Show sidebar with modes
+      lines:                    1;                 // Number of lines to show
+}
+
+//@theme "/dev/null"
+
+//@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
+//@theme "default"
+* {
+  border-color: yellow;
+  alternate-normal-background: purple;
+  background:                  red;
+}
+window{
+
+  //font:   "Hack Nerd Font Mono 14";
+  //background-color: #50121D;
+  //border-radius: 30px;
+    background-color: pink;
+    //margin:     20px;
+    padding:    20px;
+  border: 3px;
+}
+
+overlay{
+
+    background-color: red;
+}
+
+mainbox {
+
+
+    background-color: purple;
+    padding:    40px;
+    margin:     5px;
+  border: 3px;
+}
+
+inputbar {
+
+    background-color: pink;
+    padding:    20px;
+    margin:     5px;
+  border: 3px;
+}
+
+entry { // input field
+  placeholder: "Entry";
+  cursor: none;
+  background-color: red;
+  blink: false;
+  hide-cursor-on-empty: true;
+}
+promt {
+
+
+}
+
+
+
+message {
+    padding:          1px ;
+    background-color: Black;
+    border:           2px 0px 0px ;
+}
+textbox {
+    background-color: blue;
+}
+
+
+
+
+
+textbox-prompt-colon {}
+
+listview {
+
+    background-color: orange;
+    padding:    20px;
+    margin:     5px;
+  border: 3px;
+
+} 
+
+element {
+
+  text-color:  Black;
+  orientation: horizontal ;
+  children: [ element-icon, element-text ];
+  spacing: 20px;
+}
+element.selected{
+
+}
+  element-text{
+//background-color: green;
+    vertical-align: 0.5; //make text in the middle of its' window
+    horizontal-align: 0.5; //make text in the middle of its' window
+  text-color: red;
+
+  }
+  element-icon {
+    size: 2em;
+ //   background-color: green;
+  }
+
+scrollbar {
+
+    background-color: red;
+    padding:    10px;
+    border: 3px;
+}
+
+sidebar {}
+
+button {}
+
+button.selected {}
+
+
+
+element normal.normal {
+    background-color: var(normal-background);
+    text-color:       var(normal-foreground);
+}
+element normal.urgent {
+    background-color: var(urgent-background);
+    text-color:       var(urgent-foreground);
+}
+element normal.active {
+    background-color: var(active-background);
+    text-color:       var(active-foreground);
+}
+element selected.normal {
+    background-color: var(selected-normal-background);
+    text-color:       var(selected-normal-foreground);
+}
+element selected.urgent {
+    background-color: var(selected-urgent-background);
+    text-color:       var(selected-urgent-foreground);
+}
+element selected.active {
+    background-color: var(selected-active-background);
+    text-color:       var(selected-active-foreground);
+}
+element alternate.normal {
+    background-color: var(alternate-normal-background);
+    text-color:       var(alternate-normal-foreground);
+}
+element alternate.urgent {
+    background-color: var(alternate-urgent-background);
+    text-color:       var(alternate-urgent-foreground);
+}
+element alternate.active {
+    background-color: var(alternate-active-background);
+    text-color:       var(alternate-active-foreground);
+}
