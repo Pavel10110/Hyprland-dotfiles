@@ -1,0 +1,13 @@
+githubssh
+githubssh.pub
+*.pem
+*.key
+*.crt
+*.asc
+*.gpg
+*.enc
+*.der
+*.p12
+*.pfx
+*.ssh
+
