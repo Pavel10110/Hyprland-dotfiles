@@ -11,3 +11,4 @@ githubssh.pub
 *.pfx
 *.ssh
 
+waybar/.config/waybar/scripts

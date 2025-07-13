@@ -8,6 +8,25 @@
   // Left
   "modules-left": ["hyprland/workspaces"],
 
+  "hyprland/workspaces": {
+    "format": "{id}{windows}",
+    "format-icons": {},
+    "show-special": true,
+
+    "format-window-separator": "",
+    "window-rewrite-default": "",
+    "window-rewrite": {
+      "class<com.mitchellh.ghostty> title<.*nvim .*>": " ", //   
+      "title<.*YouTube.*>": " ",
+      "class<yandex-music>": " ",
+      "class<com.mitchellh.ghostty>": " ",
+      "class<org.telegram.desktop>": " ",
+      "class<discord>": " ",
+      "class<obsidian>": " 󱚌",
+      "class<zen>": " ",
+    },
+  },
+
   // Center
   "modules-center": ["custom/temp"],
 
@@ -34,6 +53,7 @@
     "on-click": "~/.config/waybar/scripts/monLight.sh --toggle && pkill -SIGRTMIN+8 waybar",
     "on-scroll-up": "~/.config/waybar/scripts/monLight.sh --brightness up && pkill -SIGRTMIN+8 waybar",
     "on-scroll-down": "~/.config/waybar/scripts/monLight.sh --brightness down && pkill -SIGRTMIN+8 waybar",
+    "on-click-right": "~/.config/waybar/scripts/launch_temp_slider.sh",
     "return-type": "json",
     "format": "{}",
     "signal": 8,

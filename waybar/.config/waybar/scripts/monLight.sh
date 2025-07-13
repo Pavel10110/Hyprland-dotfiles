@@ -5,7 +5,6 @@ HA_TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIxYzJkOWVlMWI5Y2U0Y2UxY
 ENTITY_ID="light.0xa4c138f95117ec15"
 STATE_URL="http://192.168.0.100:8123/api/states/$ENTITY_ID"
 SERVICE_URL="http://192.168.0.100:8123/api/services/light"
-
 # Toggle
 if [[ "$1" == "--toggle" ]]; then
     curl -s -X POST -H "Authorization: Bearer $HA_TOKEN" \

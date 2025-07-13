@@ -18,13 +18,43 @@ window#waybar {
    background: transparent;
 }
 
+
 /*-----module groups----*/
 /*-----modules indv----*/
 #workspaces button {
-  padding: 0px 5px;
-  background-color: transparent;
+  padding: 0px 8px;
+  margin: 0px 2px;
+  border-radius: 16px; /* skruglenie */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: @color9;
+  color: @foreground;
   font-weight: bold;
 }
+
+#workspaces button.active{
+  padding: 0px 8px;
+  margin: 0px 2px;
+  border-radius: 16px; /* skruglenie */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: @background;
+  color: @color9;
+  font-weight: bold;
+    
+}
+#workspaces button:hover{
+  padding: 0px 8px;
+  margin: 0px 2px;
+  border-radius: 16px; /* skruglenie */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: @color3;
+  color: @color10;
+  font-weight: bold;
+  transition: none;
+    
+    
+
+}
+
 #clock, 
 #custom-temp,
 #cpu,
@@ -35,8 +65,8 @@ window#waybar {
   padding: 0px 10px;
   margin: 0px 2px;
   border-radius: 16px; /* skruglenie */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: @background;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: @color9;
   color: @foreground;
   font-weight: bold;
 }

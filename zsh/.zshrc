@@ -94,7 +94,8 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='nvim'
 # fi
-
+# Add to ~/.zshrc or ~/.bashrc
+export EDITOR=nvim
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
 
@@ -111,6 +112,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # ## Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
+#
 # ( ) # Hide shell job control messages.
 (cat ~/.cache/wal/sequences &)
 
