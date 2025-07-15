@@ -1,12 +1,12 @@
 //@import "/home/archyper/.cache/wal/colors-rofi-dark.rasi"
 configuration {
   sidebar-mode: true;
-  modi:   "window,combi,drun,calc";
-  combi-modi: "window,drun,calc";
+  modi:   "combi,drun";
+  combi-modi: "drun,window,:/home/archyper/.config/scripts/launch_calc.sh";
   drun-display-format:      "{name}";  
   display-drun:             "  ";               // DRUN mode prompt
   display-combi:              "  ";               // RUN mode prompt
-  display-window:          " 󱂬 "; 
+  display-calc:          "  "; 
   sidebar-mode:             false;              // Show sidebar with modes
 }
 
