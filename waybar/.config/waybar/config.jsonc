@@ -35,7 +35,8 @@
     "return-type": "json",
     "interval": 10,
     "format": " {}",
-    "tooltip": true,
+    "on-click": "~/.config/waybar/scripts/haopen.sh",
+    "tooltip": false,
   },
 
   // Right
@@ -64,13 +65,14 @@
   },
 
   "cpu": {
-    //"interval": 10,
     "format": " {usage}%",
+    "on-click": "ghostty -e htop"
   },
 
   "memory": {
     //"interval": 30,
     "format": " {used:0.1f}Gb",
+    "on-click": "ghostty -e htop"
   },
 
   "pulseaudio": {
@@ -79,11 +81,7 @@
       "default": [" ", " ", " "],
     },
   },
-  "custom/clocktoggle": {
-    "exec": "/home/archyper/.config/waybar/scripts/clockToggle.sh",
-    "interval": 1,
-    "format": "{}",
-  },
+
   "clock": {
     "format": "{:%H:%M}",
     "format-alt": "{:%d.%m.%Y}",

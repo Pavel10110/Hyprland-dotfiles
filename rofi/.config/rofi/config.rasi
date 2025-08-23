@@ -1,8 +1,8 @@
 //@import "/home/archyper/.cache/wal/colors-rofi-dark.rasi"
 configuration {
   sidebar-mode: true;
-  modi:   "combi,drun";
-  combi-modi: "drun,window,:/home/archyper/.config/scripts/launch_calc.sh";
+  modi:   "combi,drun,yazi-sh:/home/archyper/.config/rofi/scripts/yazi.sh";
+  combi-modi: "drun,yazi-sh,window,:/home/archyper/.config/scripts/launch_calc.sh";
   drun-display-format:      "{name}";  
   display-drun:             "  ";               // DRUN mode prompt
   display-combi:              "  ";               // RUN mode prompt

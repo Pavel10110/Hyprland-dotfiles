@@ -52,7 +52,8 @@ echo "$WALLPAPER" > "$HISTORY_FILE"
 
 killall waybar && waybar & disown || waybar & disown walogram
 
-
+#Upadate theme in firefox(or firefox basid browser)
+pywalfox update
 
 ROFI_THEME="$HOME/.config/rofi/config.rasi"
 ESCAPED_WALLPAPER=$(printf '%s\n' "$WALLPAPER" | sed 's/[\&/]/\\&/g')
