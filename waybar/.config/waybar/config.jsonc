@@ -19,6 +19,7 @@
       "class<com.mitchellh.ghostty> title<.*nvim .*>": " ", //   
       "title<.*YouTube.*>": " ",
       "class<yandex-music>": " ",
+      "class<spotify>": " ",
       "class<com.mitchellh.ghostty>": " ",
       "class<org.telegram.desktop>": " ",
       "class<discord>": " ",
