@@ -57,6 +57,7 @@ window#waybar {
 
 #clock, 
 #custom-temp,
+#custom-pomodoro,
 #cpu,
 #memory,
 #tray,
@@ -70,4 +71,3 @@ window#waybar {
   color: @foreground;
   font-weight: bold;
 }
-

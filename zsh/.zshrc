@@ -127,3 +127,4 @@ source ~/.cache/wal/colors-tty.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval $(thefuck --alias)
+export PATH="$HOME/.local/bin:$PATH"

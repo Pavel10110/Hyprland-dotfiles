@@ -30,7 +30,7 @@
   },
 
   // Center
-  "modules-center": ["custom/temp"],
+  "modules-center": ["custom/temp", "custom/pomodoro"],
 
   "custom/temp": {
     "exec": "~/.config/waybar/scripts/haTemp.sh",
@@ -41,6 +41,13 @@
     "tooltip": false,
   },
 
+  "custom/pomodoro": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/waybar-module-pomodoro --work 90 -p  -a  -o 󰔛 -b  ",
+    "on-click": "~/.config/waybar/scripts/waybar-module-pomodoro toggle",
+    "on-click-right": "~/.config/waybar/scripts/waybar-module-pomodoro reset",
+  },
   // Right
   "modules-right": [
     "custom/button",
@@ -68,13 +75,13 @@
 
   "cpu": {
     "format": " {usage}%",
-    "on-click": "ghostty -e htop"
+    "on-click": "ghostty -e htop",
   },
 
   "memory": {
     //"interval": 30,
     "format": " {used:0.1f}Gb",
-    "on-click": "ghostty -e htop"
+    "on-click": "ghostty -e htop",
   },
 
   "pulseaudio": {
