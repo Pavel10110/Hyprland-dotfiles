@@ -128,3 +128,9 @@ source ~/.cache/wal/colors-tty.sh
 
 eval $(thefuck --alias)
 export PATH="$HOME/.local/bin:$PATH"
+
+
+eval "$(zoxide init zsh)"
+
+alias adsf='echo hello'
+
