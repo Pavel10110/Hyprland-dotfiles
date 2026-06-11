@@ -130,7 +130,25 @@ eval $(thefuck --alias)
 export PATH="$HOME/.local/bin:$PATH"
 
 
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
-alias adsf='echo hello'
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
+
+# make yazi switch working dir 
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+
+alias vim="nvim"
+alias k="kubectl"
+
+
+# fix cargo pkg manager issue 
+export PATH="$HOME/.cargo/bin:$PATH"

@@ -1,12 +1,13 @@
 //@import "/home/archyper/.cache/wal/colors-rofi-dark.rasi"
 configuration {
   sidebar-mode: true;
-  modi:   "combi,drun,yazi-sh:/home/archyper/.config/rofi/scripts/yazi.sh";
-  combi-modi: "drun,yazi-sh,window,:/home/archyper/.config/scripts/launch_calc.sh";
+  modi:   "combi,drun" /* yazi-sh:/home/archyper/.config/rofi/scripts/yazi.sh  */ ;
+  combi-modi: "drun,window,:/home/archyper/.config/scripts/launch_calc.sh ";
   drun-display-format:      "{name}";  
   display-drun:             "  ";               // DRUN mode prompt
   display-combi:              "  ";               // RUN mode prompt
   display-calc:          "  "; 
+  display-window:          "  "; 
   sidebar-mode:             false;              // Show sidebar with modes
 }
 
@@ -158,4 +159,28 @@ scrollbar {
 
 sidebar {
 
+}
+
+
+/* Force all textboxes to not draw a white panel */
+textbox {
+  background-color: transparent;
+  text-color: @foreground;
+  font: "Hack Nerd Font Mono 12";
+}
+
+/* Error popup container */
+error-message {
+  background-image: url("/home/archyper/.cache/rofi_wallpaper_small.jpg", width);
+  background-color: rgba(0, 0, 0, 0.60);
+  border-radius: 30px;
+  padding: 18px 20px;
+  text-color: @foreground;
+}
+
+/* Error popup text specifically */
+error-message textbox {
+  background-color: transparent;
+  text-color: @foreground;
+  padding: 0px;
 }
