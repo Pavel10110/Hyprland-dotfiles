@@ -71,7 +71,7 @@ $clipboard =  cliphist list | rofi -dmenu -p "Clipboard" | cliphist decode | wl-
 
 # Auto-starts (no workspace in exec-once)
 exec-once = discord
-exec-once = hyprctl dispatch exec "[workspace 1 silent] Telegram"
+exec-once = Telegram
 exec-once = zen-browser
 #exec-once = tradingview
 exec-once = obsidian
@@ -80,8 +80,7 @@ exec-once = yandexmusic
 
 # Rules for assignment
 windowrule = workspace 1 silent, match:class ^(discord)$  # Discord (class may vary; check hyprctl clients)
-# disabled: would also catch Vexa separate Telegram profile
-# windowrule = workspace 1 silent, match:initial_class ^(org.telegram.desktop)$  # Telegram
+windowrule = workspace 1 silent, match:initial_class ^(org.telegram.desktop)$  # Telegram
 
 
 #windowrule = match:initial_class ^org\.telegram\.desktop$, match:initial_title ^Hermes.*, workspace 6 silent
@@ -193,7 +192,6 @@ decoration {
 }
 
 windowrule = opacity 0.95 override 0.85 override, match:class ^(zen)$
-windowrule = opacity 0.95 override 0.85 override, match:class ^(org.telegram.desktop)$
 
 # rofi blur
 layerrule = match:namespace ^(rofi)$, blur on
@@ -304,7 +302,7 @@ bind = $mainMod, W, exec, ~/.config/scripts/changeWallpaper.sh
 
 # Tiling
 bind = $mainMod, Q, killactive
-bind = $mainMod SHIFT, V, togglefloating
+bind = $mainMod, V, togglefloating
 bind = $mainMod, F, fullscreen
 
 bind = $mainMod, M, exit,
@@ -433,16 +431,8 @@ windowrule = match:class ^(light_temp_slider\.py)$, size 300 50
 
 # BEGIN VEXA TELEGRAM WINDOW
 # Separate Telegram profile/window for Vexa chat
-exec-once = sleep 5 && hyprctl dispatch exec "[workspace 6 silent] /usr/bin/Telegram -many -workdir /home/archyper/.local/share/tdesktop-vexa -- tg://resolve?domain=hermproxbot"
+exec-once = sleep 5 && /usr/bin/Telegram -many -workdir /home/archyper/.local/share/tdesktop-vexa -- "tg://resolve?domain=hermproxbot"
 
+# Try to route Vexa/Hermes Telegram window to workspace 6
+windowrule = match:class ^(org.telegram.desktop|Telegram)$, match:title ^.*(Vexa|Hermes|hermproxbot).*, workspace 6 silent
 # END VEXA TELEGRAM WINDOW
-
-
-exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE
-exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE
-exec-once = systemctl --user start hyprland-session.target
-
-# BEGIN VEXA WHISPER STREAM
-# Super+V: open live Whisper transcription
-bind = $mainMod, V, exec, /home/vexa/shared/vexa-whisper-stream.sh
-# END VEXA WHISPER STREAM

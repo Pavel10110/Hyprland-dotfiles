@@ -304,7 +304,7 @@ bind = $mainMod, W, exec, ~/.config/scripts/changeWallpaper.sh
 
 # Tiling
 bind = $mainMod, Q, killactive
-bind = $mainMod SHIFT, V, togglefloating
+bind = $mainMod, V, togglefloating
 bind = $mainMod, F, fullscreen
 
 bind = $mainMod, M, exit,
@@ -442,7 +442,8 @@ exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CUR
 exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE
 exec-once = systemctl --user start hyprland-session.target
 
+
 # BEGIN VEXA WHISPER STREAM
-# Super+V: open live Whisper transcription
-bind = $mainMod, V, exec, /home/vexa/shared/vexa-whisper-stream.sh
+# Opens live Whisper transcription window
+bind = $mainMod SHIFT, V, exec, /home/vexa/shared/vexa-whisper-stream.sh
 # END VEXA WHISPER STREAM
