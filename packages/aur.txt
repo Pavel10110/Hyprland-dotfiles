@@ -1,0 +1,6 @@
+eww
+paru
+paru-debug
+whdd
+yandex-music-bin
+zen-browser-bin
