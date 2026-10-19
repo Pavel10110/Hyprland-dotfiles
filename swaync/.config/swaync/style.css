@@ -1,0 +1,136 @@
+@import "/home/dedok/.cache/wal/colors-waybar.css";
+
+* {
+    font-family: "Hack Nerd Font Propo", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* --- Control Center Panel --- */
+.control-center {
+    background: transparent;
+    border-radius: 16px; 
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    margin: 10px;
+}
+
+.widget-title {
+    color: @foreground;
+    font-size: 16px;
+    margin: 10px;
+}
+
+.widget-title > button {
+    font-size: 14px;
+    color: @foreground;
+    text-shadow: none;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 16px;
+}
+
+.widget-title > button:hover {
+    background: @color3;
+    color: @color10;
+}
+
+/* --- Notifications --- */
+.notification {
+    border-radius: 16px;
+    background: @color9;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 8px;
+    padding: 0;
+}
+
+.notification-content {
+    background: transparent;
+    padding: 12px;
+    border-radius: 16px;
+}
+
+.close-button {
+    background: transparent;
+    color: @foreground;
+    border-radius: 16px;
+    margin: 8px;
+}
+
+.close-button:hover {
+    background-color: @color3;
+    color: @color10;
+}
+
+.notification-default-action,
+.notification-action {
+    padding: 8px;
+    margin: 0;
+    box-shadow: none;
+    background: transparent;
+    border: none;
+    color: @foreground;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+    -gtk-icon-effect: none;
+    background: @background;
+    border-radius: 16px;
+    color: @color9;
+}
+
+.summary {
+    font-size: 14px;
+    font-weight: bold;
+    color: @foreground;
+}
+
+.body {
+    font-size: 13px;
+    font-weight: normal;
+    color: @foreground;
+}
+
+
+/* --- Do Not Disturb Widget --- */
+.widget-dnd {
+    background: @color9;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 8px;
+    color: @foreground;
+}
+
+.widget-dnd > switch {
+    background: @background;
+    border-radius: 16px;
+}
+
+.widget-dnd > switch:checked {
+    background: @color3;
+}
+
+/* --- MPRIS Media Player Widget --- */
+.widget-mpris {
+    background: @color9;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 8px;
+    padding: 8px;
+    color: @foreground;
+}
+
+.widget-mpris-player {
+    padding: 8px;
+    margin: 0px;
+}
+
+.widget-mpris-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.widget-mpris-subtitle {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
