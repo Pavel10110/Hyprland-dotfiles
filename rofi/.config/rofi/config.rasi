@@ -1,8 +1,8 @@
-//@import "/home/archyper/.cache/wal/colors-rofi-dark.rasi"
+//@import "/home/dedok/.cache/wal/colors-rofi-dark.rasi"
 configuration {
   sidebar-mode: true;
-  modi:   "combi,drun" /* yazi-sh:/home/archyper/.config/rofi/scripts/yazi.sh  */ ;
-  combi-modi: "drun,window,:/home/archyper/.config/scripts/launch_calc.sh ";
+  modi:   "combi,drun" /* yazi-sh:/home/dedok/.config/rofi/scripts/yazi.sh  */ ;
+  combi-modi: "drun,window,:/home/dedok/.config/scripts/launch_calc.sh ";
   drun-display-format:      "{name}";  
   display-drun:             "  ";               // DRUN mode prompt
   display-combi:              "  ";               // RUN mode prompt
@@ -13,7 +13,7 @@ configuration {
 
 @theme "/dev/null"
 
-@import "/home/archyper/.cache/wal/colors-rofi-dark.rasi"
+@import "/home/dedok/.cache/wal/colors-rofi-dark.rasi"
 * {
   // alternate-normal-background: purple;
   // background:                  red;
@@ -30,10 +30,11 @@ window{
 
   background-color: rgba(0, 0, 0, 0.2);
   transparency: "real";
-  //margin:     20px;
+  margin:     0px;
   border-radius: 30px;
   width: 600px;
   border:0px;
+  padding: 0px;
 
 }
 
@@ -50,8 +51,8 @@ mainbox {
 inputbar {
 
   //background-color: gray;
-  //  background-image: url("/home/archyper/.cache/rofi_wallpaper_small.jpg", width);
-  background-image: url("/home/archyper/.cache/rofi_wallpaper_small.jpg", width);
+  //  background-image: url("/home/dedok/.cache/rofi_wallpaper_small.jpg", width);
+  background-image: url("/home/dedok/.cache/rofi_wallpaper_small.jpg", width);
   background-color: rgba(0, 0, 0, 0.6);
   padding:    100px 20px 80px 20px;
   border-radius: 30px 30px 0px 0px;
@@ -171,7 +172,7 @@ textbox {
 
 /* Error popup container */
 error-message {
-  background-image: url("/home/archyper/.cache/rofi_wallpaper_small.jpg", width);
+  background-image: url("/home/dedok/.cache/rofi_wallpaper_small.jpg", width);
   background-color: rgba(0, 0, 0, 0.60);
   border-radius: 30px;
   padding: 18px 20px;

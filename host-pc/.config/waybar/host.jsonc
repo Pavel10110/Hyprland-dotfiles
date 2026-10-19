@@ -1,0 +1,10 @@
+{
+  "modules-right": [
+    "custom/button",
+    "tray",
+    "cpu",
+    "memory",
+    "pulseaudio",
+    "clock"
+  ]
+}

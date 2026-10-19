@@ -1,4 +1,4 @@
-@import "/home/archyper/.cache/wal/colors-waybar.css";
+@import "/home/dedok/.cache/wal/colors-waybar.css";
 
 * {
   font-family: Hack Nerd Font Propo;
@@ -58,10 +58,13 @@ window#waybar {
 #clock, 
 #custom-temp,
 #custom-pomodoro,
+#battery,
+#network,
 #cpu,
 #memory,
 #tray,
 #pulseaudio,
+#custom-notification,
 #custom-button {
   padding: 0px 10px;
   margin: 0px 2px;

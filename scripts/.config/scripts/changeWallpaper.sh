@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Directory containing wallpapers
-WALLPAPER_DIR="/home/archyper/Pictures/wallpapers/"
-HISTORY_FILE="/home/archyper/.last_wallpaper"
+WALLPAPER_DIR="/home/dedok/Pictures/wallpapers/"
+HISTORY_FILE="/home/dedok/.last_wallpaper"
 
 # Get the list of wallpapers sorted alphabetically
 WALLPAPERS=($(find "$WALLPAPER_DIR" -type f | sort))
@@ -44,8 +44,8 @@ echo "$WALLPAPER" > "$HISTORY_FILE"
 #hyprctl hyprpaper preload "$WALLPAPER"
 #hyprctl hyprpaper wallpaper ",$WALLPAPER"
 
-# Uncomment below if using `swww` for smooth transitions
- swww img "$WALLPAPER" --transition-type grow --transition-duration 1
+# Uncomment below if using `awww` for smooth transitions
+ awww img "$WALLPAPER" --transition-type grow --transition-duration 1
 
  # To use wallpaper colors(save into file) with pywal
  wal -i $WALLPAPER
@@ -77,6 +77,10 @@ ROFI_THEME="$HOME/.config/rofi/config.rasi"
 
 # Replace the background-image line with the new resized path
 sed -i "s|url(\".*\", width);|url(\"$ESCAPED_WALLPAPER\", width);|" "$ROFI_THEME"
+
+
+swaync-client -rs
+
 
 
 #head -c 1000000 "$WALLPAPER" > /dev/null
