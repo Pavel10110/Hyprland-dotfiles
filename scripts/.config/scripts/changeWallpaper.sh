@@ -1,8 +1,17 @@
 #!/bin/bash
 
 # Directory containing wallpapers
-WALLPAPER_DIR="/home/dedok/Pictures/wallpapers/"
-HISTORY_FILE="/home/dedok/.last_wallpaper"
+#
+#
+#
+
+
+WALLPAPER_DIR="/home/archyper/Pictures/wallpapers"
+HISTORY_FILE="/home/archyper/.last_wallpaper"
+
+
+#WALLPAPER_DIR="~/Pictures/wallpapers/"
+#HISTORY_FILE="~/.last_wallpaper"
 
 # Get the list of wallpapers sorted alphabetically
 WALLPAPERS=($(find "$WALLPAPER_DIR" -type f | sort))
