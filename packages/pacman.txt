@@ -188,6 +188,7 @@ vpnc
 waybar
 wget
 whdd
+ggml-vulkan
 whisper-cpp
 wireless-regdb
 wireless_tools

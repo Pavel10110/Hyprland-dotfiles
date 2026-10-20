@@ -1,3 +1,107 @@
+
+
+@import "/home/archyper/.cache/wal/colors-waybar.css";
+
+* {
+  font-family: Hack Nerd Font Propo;
+  font-size: 14px;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+#waybar {
+  padding: 0px;
+  margin: 0px;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+/*-----workspaces-----*/
+#workspaces button {
+  padding: 0px 8px;
+  margin: 0px 2px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: @color9;
+  color: @foreground;
+  font-weight: bold;
+}
+
+#workspaces button.active {
+  padding: 0px 8px;
+  margin: 0px 2px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: @background;
+  color: @color9;
+  font-weight: bold;
+}
+
+#workspaces button:hover {
+  padding: 0px 8px;
+  margin: 0px 2px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: @color3;
+  color: @color10;
+  font-weight: bold;
+  transition: none;
+}
+
+/*-----modules base styling (both PC and Laptop)-----*/
+#clock, 
+#custom-temp,
+#custom-pomodoro,
+#battery,
+#network,
+#custom-keyboard-battery,
+#custom-jbl-battery,
+#cpu,
+#memory,
+#tray,
+#pulseaudio,
+#custom-notification,
+#custom-button {
+  padding: 0px 10px;
+  margin: 0px 2px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: @color9;
+  color: @foreground;
+  font-weight: bold;
+}
+
+/*-----custom battery module states (PC)-----*/
+#custom-keyboard-battery.warning,
+#custom-jbl-battery.warning {
+  background: @color3;
+  color: @color10;
+}
+
+#custom-keyboard-battery.critical,
+#custom-jbl-battery.critical {
+  background: @color1;
+  color: @foreground;
+}
+
+#custom-keyboard-battery.disconnected,
+#custom-keyboard-battery.unavailable,
+#custom-jbl-battery.disconnected,
+#custom-jbl-battery.unavailable {
+  opacity: 0.75;
+}
+
+
+
+
+
+
+/*
+
+
 @import "/home/dedok/.cache/wal/colors-waybar.css";
 
 * {
@@ -19,12 +123,11 @@ window#waybar {
 }
 
 
-/*-----module groups----*/
-/*-----modules indv----*/
+
 #workspaces button {
   padding: 0px 8px;
   margin: 0px 2px;
-  border-radius: 16px; /* skruglenie */
+  border-radius: 16px; 
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: @color9;
   color: @foreground;
@@ -34,7 +137,7 @@ window#waybar {
 #workspaces button.active{
   padding: 0px 8px;
   margin: 0px 2px;
-  border-radius: 16px; /* skruglenie */
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: @background;
   color: @color9;
@@ -44,7 +147,7 @@ window#waybar {
 #workspaces button:hover{
   padding: 0px 8px;
   margin: 0px 2px;
-  border-radius: 16px; /* skruglenie */
+  border-radius: 16px; 
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: @color3;
   color: @color10;
@@ -58,8 +161,13 @@ window#waybar {
 #clock, 
 #custom-temp,
 #custom-pomodoro,
+<<<<<<< HEAD
 #battery,
 #network,
+=======
+#custom-keyboard-battery,
+#custom-jbl-battery,
+>>>>>>> 5baf95e (pc config edits before sync)
 #cpu,
 #memory,
 #tray,
@@ -68,9 +176,30 @@ window#waybar {
 #custom-button {
   padding: 0px 10px;
   margin: 0px 2px;
-  border-radius: 16px; /* skruglenie */
+  border-radius: 16px; 
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: @color9;
   color: @foreground;
   font-weight: bold;
 }
+
+#custom-keyboard-battery.warning,
+#custom-jbl-battery.warning {
+  background: @color3;
+  color: @color10;
+}
+
+#custom-keyboard-battery.critical,
+#custom-jbl-battery.critical {
+  background: @color1;
+  color: @foreground;
+}
+
+#custom-keyboard-battery.disconnected,
+#custom-keyboard-battery.unavailable,
+#custom-jbl-battery.disconnected,
+#custom-jbl-battery.unavailable {
+  opacity: 0.75;
+}
+*/
+

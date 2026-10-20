@@ -1,0 +1,13 @@
+[Unit]
+Description=Turn off RGB asynchronously after boot and resume
+After=systemd-udevd.service
+
+[Service]
+# A simple service reaches active immediately; hardware readiness and OpenRGB
+# retries must never hold multi-user.target or logind's post-sleep hooks.
+Type=simple
+ExecStart=/usr/local/lib/rgb-off/worker.sh
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target

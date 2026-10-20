@@ -1,0 +1,25 @@
+[Unit]
+Description=Archyper PC lifecycle status publisher (MQTT)
+Wants=network.target
+After=network.target NetworkManager.service dbus.service systemd-logind.service
+
+[Service]
+Type=simple
+User=root
+EnvironmentFile=/etc/pc-status/mqtt.env
+ExecStart=/usr/bin/python3 /usr/local/lib/pc-status/pc_status.py
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=5
+RuntimeDirectory=pc-status
+RuntimeDirectoryMode=0700
+RuntimeDirectoryPreserve=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/run/pc-status
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

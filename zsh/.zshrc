@@ -148,7 +148,34 @@ function y() {
 
 alias vim="nvim"
 alias k="kubectl"
+alias swww="awww"
 
 
 # fix cargo pkg manager issue 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+
+
+eval $(keychain --eval --quiet ~/.ssh/archyper)
+
+
+function y() {
+    local tmp
+    tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+
+    yazi "$@" --cwd-file="$tmp"
+
+    if [ -f "$tmp" ]; then
+        local cwd
+        cwd="$(cat "$tmp")"
+        if [ -n "$cwd" ] && [ -d "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            cd -- "$cwd"
+        fi
+    fi
+
+    rm -f -- "$tmp"
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

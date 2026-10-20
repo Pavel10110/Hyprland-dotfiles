@@ -1,0 +1,5 @@
+input_text:
+  monitor_light_last_lifecycle_event:
+    name: Monitor light last lifecycle event
+    max: 255
+    mode: text

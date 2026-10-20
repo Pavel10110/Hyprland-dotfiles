@@ -13,3 +13,19 @@ githubssh.pub
 *.ssh
 
 waybar/.config/waybar/scripts
+
+# Vexa private/runtime data must never enter Git.
+vexa/**/models/
+vexa/**/__pycache__/
+vexa/**/.cache/
+vexa/**/*.bin
+vexa/**/*.wav
+vexa/**/*.log
+vexa/**/.env
+vexa/**/secrets/
+
+# System lifecycle runtime artifacts and private credentials.
+__pycache__/
+*.pyc
+.env
+mqtt.env

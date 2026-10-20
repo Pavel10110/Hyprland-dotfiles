@@ -1,0 +1,77 @@
+- id: archyper_monitor_lifecycle_v2
+  alias: Archyper monitor light lifecycle
+  description: Explicit PC boot/resume/sleep/shutdown only. No presence, brightness
+    or colour policy.
+  triggers:
+  - trigger: mqtt
+    topic: archyper/pc-status/event
+  conditions:
+  - condition: template
+    value_template: '{{ trigger.payload_json.event in [''boot'', ''resume'', ''sleep'',
+      ''shutdown''] and -5 <= as_timestamp(now()) - (trigger.payload_json.ts | float(0))
+      < 30 }}'
+  - condition: template
+    value_template: '{{ trigger.payload_json.id is defined and trigger.payload_json.id
+      != states(''input_text.monitor_light_last_lifecycle_event'') }}'
+  actions:
+  - action: input_text.set_value
+    target:
+      entity_id: input_text.monitor_light_last_lifecycle_event
+    data:
+      value: '{{ trigger.payload_json.id }}'
+  - choose:
+    - conditions: '{{ trigger.payload_json.event in [''boot'', ''resume''] }}'
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.bedroom_monitor_light
+        data: {}
+    default:
+    - delay:
+        seconds: 10
+    - condition: state
+      entity_id: binary_sensor.archyper_pc_awake
+      state: 'off'
+    - action: light.turn_off
+      target:
+        entity_id: light.bedroom_monitor_light
+      data: {}
+  mode: restart
+  max_exceeded: silent
+- id: '1761816974036'
+  alias: 'Bedroom monitor light on in the morning  '
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - input_boolean.sleep_focus_mode
+    from: 'on'
+    to: 'off'
+  conditions:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.bedroom_monitor_light
+  - delay:
+      hours: 0
+      minutes: 12
+      seconds: 0
+      milliseconds: 0
+  - condition: template
+    value_template: '{{ not is_state(''binary_sensor.archyper_pc_awake'', ''on'')
+      }}'
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.bedroom_monitor_light
+  mode: single

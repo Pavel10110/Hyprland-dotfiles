@@ -1,0 +1,4 @@
+^/\.stow-local-ignore$
+(^|/)models(/|$)
+(^|/)__pycache__(/|$)
+(^|/)\.cache(/|$)

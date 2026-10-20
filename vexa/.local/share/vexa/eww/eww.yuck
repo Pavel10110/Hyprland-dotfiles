@@ -1,0 +1,68 @@
+(defvar vexa_text "Transcribing...")
+(defvar vexa_b1 "▁")
+(defvar vexa_b2 "▁")
+(defvar vexa_b3 "▁")
+(defvar vexa_b4 "▁")
+(defvar vexa_b5 "▁")
+
+(defwindow vexa-listening
+  :geometry (geometry
+    :x "0px"
+    :y "54px"
+    :width "136px"
+    :height "42px"
+    :anchor "bottom center")
+  :stacking "overlay"
+  :focusable false
+  :namespace "vexa-dictation"
+  (centerbox :orientation "h"
+    (box)
+    (box
+      :class "vexa-shell"
+      :orientation "h"
+      :space-evenly false
+      :spacing 0
+      :halign "center"
+      :valign "center"
+      (box
+        :class "vexa-wave-wrap"
+        :orientation "h"
+        :space-evenly false
+        :spacing 4
+        :halign "center"
+        :valign "center"
+        (box :class "vexa-bar-slot" (label :class "vexa-bar" :text vexa_b1))
+        (box :class "vexa-bar-slot" (label :class "vexa-bar" :text vexa_b2))
+        (box :class "vexa-bar-slot" (label :class "vexa-bar" :text vexa_b3))
+        (box :class "vexa-bar-slot" (label :class "vexa-bar" :text vexa_b4))
+        (box :class "vexa-bar-slot" (label :class "vexa-bar" :text vexa_b5))))
+    (box)))
+
+(defwindow vexa-transcribing
+  :geometry (geometry
+    :x "0px"
+    :y "54px"
+    :width "136px"
+    :height "42px"
+    :anchor "bottom center")
+  :stacking "overlay"
+  :focusable false
+  :namespace "vexa-dictation"
+  (centerbox :orientation "h"
+    (box)
+    (box
+      :class "vexa-shell"
+      :orientation "h"
+      :space-evenly false
+      :spacing 0
+      :halign "center"
+      :valign "center"
+      (box
+        :class "vexa-text-wrap"
+        :orientation "h"
+        :space-evenly false
+        :spacing 0
+        :halign "center"
+        :valign "center"
+        (label :class "vexa-text" :text vexa_text :limit-width 16 :show-truncated true)))
+    (box)))

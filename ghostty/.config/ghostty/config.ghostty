@@ -1,0 +1,4 @@
+# Request compositor background blur explicitly (ext-background-effect-v1).
+# Keep Hyprland responsible for the existing whole-window opacity.
+background-blur = true
+background-opacity = 0.99

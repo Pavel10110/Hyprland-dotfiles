@@ -1,0 +1,5 @@
+#!/bin/sh
+# Queue a supervised background worker. Never run OpenRGB inside systemd-sleep.
+case "$1" in
+    post) /usr/bin/systemctl restart --no-block rgb-off.service ;;
+esac

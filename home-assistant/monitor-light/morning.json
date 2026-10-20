@@ -1,0 +1,58 @@
+{
+  "id": "1761816974036",
+  "alias": "Bedroom monitor light on in the morning  ",
+  "description": "",
+  "triggers": [
+    {
+      "trigger": "state",
+      "entity_id": [
+        "input_boolean.sleep_focus_mode"
+      ],
+      "from": "on",
+      "to": "off"
+    }
+  ],
+  "conditions": [
+    {
+      "condition": "time",
+      "weekday": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "action": "light.turn_on",
+      "metadata": {},
+      "data": {},
+      "target": {
+        "entity_id": "light.bedroom_monitor_light"
+      }
+    },
+    {
+      "delay": {
+        "hours": 0,
+        "minutes": 12,
+        "seconds": 0,
+        "milliseconds": 0
+      }
+    },
+    {
+      "condition": "template",
+      "value_template": "{{ not is_state('binary_sensor.archyper_pc_awake', 'on') }}"
+    },
+    {
+      "action": "light.turn_off",
+      "metadata": {},
+      "data": {},
+      "target": {
+        "entity_id": "light.bedroom_monitor_light"
+      }
+    }
+  ],
+  "mode": "single"
+}

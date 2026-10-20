@@ -1,0 +1,15 @@
+[Unit]
+Description=Hyprsunset Auto-Controller
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 %h/.local/share/vexa/bin/hyprsunset_controller.py
+Restart=on-failure
+RestartSec=5s
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=%h/.Xauthority
+WorkingDirectory=%h/.local/share/vexa/bin
+
+[Install]
+WantedBy=default.target

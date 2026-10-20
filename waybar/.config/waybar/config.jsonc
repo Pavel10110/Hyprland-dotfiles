@@ -12,8 +12,10 @@
   "modules-left": ["hyprland/workspaces"],
 
   "hyprland/workspaces": {
-    "format": "{id}{windows}",
-    "format-icons": {},
+  "format": "{icon}{windows}",
+  "format-icons": {
+      "special": "󰌨",
+    },
     "show-special": true,
     "format-window-separator": "",
     "window-rewrite-default": "",
@@ -71,6 +73,20 @@
     "on-click": "~/.config/waybar/scripts/waybar-module-pomodoro toggle",
     "on-click-right": "~/.config/waybar/scripts/waybar-module-pomodoro reset"
   },
+//<<<<<<< HEAD
+//=======
+//  // Right
+//  "modules-right": [
+//    "custom/button",
+//    "tray",
+//    "custom/keyboard-battery",
+//    "custom/jbl-battery",
+//    "cpu",
+//    "memory",
+//    "pulseaudio",
+//    "clock",
+//  ],
+//>>>>>>> 5baf95e (pc config edits before sync)
 
   // Module Definitions (Shared by all machines)
   "custom/button": {
@@ -111,6 +127,22 @@
     "format-disconnected": "⚠ Disconnected",
     "on-click-right": "kitty -e nmtui",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+
+  "custom/keyboard-battery": {
+    "exec": "~/.config/waybar/scripts/keyboard-battery.sh",
+    "return-type": "json",
+    "interval": 30,
+    "format": "{}",
+    "tooltip": true,
+  },
+
+  "custom/jbl-battery": {
+    "exec": "~/.local/share/vexa/bin/jbl-quantum-battery.py --waybar",
+    "return-type": "json",
+    "interval": 30,
+    "format": "{}",
+    "tooltip": true,
   },
 
   "cpu": {

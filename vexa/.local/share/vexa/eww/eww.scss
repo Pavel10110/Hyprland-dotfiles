@@ -1,0 +1,43 @@
+$bg: #041231;
+$fg: #c1c7c6;
+$accent: #61A4D2;
+$accent2: #DEAC73;
+
+* {
+  all: unset;
+  font-family: monospace;
+}
+
+.vexa-shell {
+  background-color: rgba(red($bg), green($bg), blue($bg), 0.42);
+  border: 1px solid rgba(red($accent), green($accent), blue($accent), 0.70);
+  border-radius: 18px;
+  padding: 0 6px;
+  min-height: 38px;
+  box-shadow: none;
+}
+
+.vexa-wave-wrap {
+  margin: 0;
+}
+
+.vexa-bar-slot {
+  min-width: 12px;
+}
+
+.vexa-text-wrap {
+  min-width: 92px;
+}
+
+.vexa-text {
+  color: $fg;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.vexa-bar {
+  color: $accent;
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 0;
+}
