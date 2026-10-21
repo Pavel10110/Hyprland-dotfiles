@@ -1,82 +1,198 @@
 @import "/home/dedok/.cache/wal/colors-waybar.css";
 
 * {
-    font-family: "Hack Nerd Font Propo", sans-serif;
+    all: unset;
+    font-family: "Hack Nerd Font Propo", "Hack Nerd Font", sans-serif;
     font-size: 14px;
     font-weight: bold;
 }
 
-/* --- Control Center Panel --- */
+/* --- Main Control Center Panel --- */
 .control-center {
-    background: transparent;
-    border-radius: 16px; 
-    border: 1px solid rgba(255, 255, 255, 0.15); 
-    margin: 10px;
+    background: alpha(@background, 0.94);
+    border-radius: 20px;
+    border: 2px solid @color9;
+    padding: 14px;
 }
 
+.control-center-list,
+.control-center-list-placeholder {
+    background: transparent;
+}
+
+/* --- Top Nerd Icon Buttons Grid --- */
+.widget-buttons-grid {
+    background: transparent;
+    margin-bottom: 10px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+    background: alpha(@color9, 0.15);
+    color: @foreground;
+    border-radius: 14px;
+    padding: 10px 0px;
+    min-width: 56px;
+    margin: 3px;
+    font-size: 20px;
+    border: 1px solid alpha(@color9, 0.3);
+    transition: all 0.2s ease;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+    background: alpha(@color9, 0.4);
+    color: @foreground;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+    background: @color9;
+    color: @background;
+    border-color: @color9;
+}
+
+/* --- MPRIS Media Player --- */
+.widget-mpris,
+.widget-mpris > box {
+    background: transparent;
+    margin: 4px 2px;
+    padding: 0;
+}
+
+.widget-mpris-player {
+    background: alpha(@color9, 0.16);
+    color: @foreground;
+    border-radius: 18px;
+    border: 1px solid alpha(@color9, 0.35);
+    padding: 12px;
+    margin: 0;
+}
+
+.widget-mpris-album-art {
+    border-radius: 12px;
+}
+
+.widget-mpris-title {
+    font-weight: bold;
+    font-size: 14px;
+    color: @foreground;
+}
+
+.widget-mpris-subtitle {
+    font-size: 12px;
+    font-weight: normal;
+    color: alpha(@foreground, 0.75);
+}
+
+.widget-mpris-player button {
+    color: @foreground;
+    background: transparent;
+    border-radius: 10px;
+    padding: 6px 10px;
+    margin: 2px;
+}
+
+.widget-mpris-player button:hover {
+    background: @color9;
+    color: @background;
+}
+
+/* --- Title & Clear All Pill --- */
 .widget-title {
     color: @foreground;
-    font-size: 16px;
-    margin: 10px;
+    font-size: 15px;
+    margin: 10px 6px 8px 6px;
 }
 
 .widget-title > button {
-    font-size: 14px;
-    color: @foreground;
-    text-shadow: none;
-    background: transparent;
-    box-shadow: none;
-    border-radius: 16px;
+    font-size: 12px;
+    color: @background;
+    background: @color9;
+    border-radius: 99px;
+    padding: 5px 14px;
+    transition: all 0.2s ease;
 }
 
 .widget-title > button:hover {
     background: @color3;
-    color: @color10;
+    color: @background;
 }
 
-/* --- Notifications --- */
+/* --- Notification Groups --- */
+.notification-group {
+    background: transparent;
+    border-radius: 18px;
+    margin: 4px 2px;
+    padding: 4px;
+}
+
+.notification-group.collapsed {
+    background: transparent;
+    padding: 0;
+}
+
+.notification-group-headers {
+    color: @foreground;
+    margin: 4px 8px 6px 8px;
+}
+
+.notification-group-icon {
+    color: @foreground;
+    margin-right: 8px;
+}
+
+.notification-group-header {
+    font-size: 14px;
+    font-weight: bold;
+    color: @foreground;
+}
+
+/* Group Expand & Close Buttons */
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+    background: alpha(@color9, 0.25);
+    color: @foreground;
+    border: 1px solid alpha(@color9, 0.4);
+    border-radius: 99px;
+    padding: 4px;
+    min-width: 22px;
+    min-height: 22px;
+    margin-left: 6px;
+    transition: all 0.2s ease;
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover {
+    background: @color9;
+    color: @background;
+}
+
+/* --- Individual Notification Cards --- */
+.notification-row,
+.notification-background,
+.floating-notifications {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+/* Opaque dark base + tint prevents stacked notifications from bleeding through */
 .notification {
     border-radius: 16px;
-    background: @color9;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    margin: 8px;
-    padding: 0;
+    background-color: @background;
+    background-image: linear-gradient(to bottom, alpha(@color9, 0.22), alpha(@color9, 0.14));
+    border: 1.5px solid @color9;
+    margin: 5px 2px;
+    padding: 12px;
 }
 
 .notification-content {
     background: transparent;
-    padding: 12px;
-    border-radius: 16px;
+    padding: 2px 4px;
+    border-radius: 12px;
 }
 
-.close-button {
-    background: transparent;
-    color: @foreground;
-    border-radius: 16px;
-    margin: 8px;
-}
-
-.close-button:hover {
-    background-color: @color3;
-    color: @color10;
-}
-
-.notification-default-action,
-.notification-action {
-    padding: 8px;
-    margin: 0;
-    box-shadow: none;
-    background: transparent;
-    border: none;
-    color: @foreground;
-}
-
-.notification-default-action:hover,
-.notification-action:hover {
-    -gtk-icon-effect: none;
-    background: @background;
-    border-radius: 16px;
-    color: @color9;
+.image {
+    border-radius: 10px;
+    margin-right: 12px;
 }
 
 .summary {
@@ -85,52 +201,82 @@
     color: @foreground;
 }
 
+.time {
+    font-size: 11px;
+    font-weight: bold;
+    color: alpha(@foreground, 0.65);
+    margin-right: 28px;
+}
+
 .body {
     font-size: 13px;
     font-weight: normal;
+    color: alpha(@foreground, 0.9);
+    margin-top: 4px;
+}
+
+/* --- Action Buttons ("Mark as read", "Reply", etc.) --- */
+.notification-alt-actions {
+    background: transparent;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid alpha(@color9, 0.25);
+}
+
+.notification-action {
+    background: alpha(@color9, 0.25);
     color: @foreground;
+    border: 1px solid alpha(@color9, 0.45);
+    border-radius: 10px;
+    padding: 6px 12px;
+    margin: 2px 4px;
 }
 
-
-/* --- Do Not Disturb Widget --- */
-.widget-dnd {
-    background: @color9;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    margin: 8px;
-    color: @foreground;
-}
-
-.widget-dnd > switch {
-    background: @background;
-    border-radius: 16px;
-}
-
-.widget-dnd > switch:checked {
-    background: @color3;
-}
-
-/* --- MPRIS Media Player Widget --- */
-.widget-mpris {
-    background: @color9;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    margin: 8px;
-    padding: 8px;
-    color: @foreground;
-}
-
-.widget-mpris-player {
-    padding: 8px;
-    margin: 0px;
-}
-
-.widget-mpris-title {
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.widget-mpris-subtitle {
+.notification-action > button,
+.notification-action > label {
+    background: transparent;
+    color: inherit;
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+}
+
+.notification-action:hover {
+    background: @color9;
+    color: @background;
+    border-color: @color9;
+}
+
+.notification-default-action {
+    background: transparent;
+    border-radius: 14px;
+}
+
+/* --- Close Button (Top Right of Notification) --- */
+.close-button {
+    background: alpha(@color9, 0.25);
+    color: @foreground;
+    border-radius: 99px;
+    margin: 10px;
+    padding: 2px;
+    min-width: 22px;
+    min-height: 22px;
+    transition: all 0.2s ease;
+}
+
+.close-button:hover {
+    background: @color9;
+    color: @background;
+}
+
+/* Hide collapsed group action buttons so they don't stack ("Mark as read" x3 fix) */
+.notification-group.collapsed .notification-alt-actions {
+    opacity: 0;
+}
+
+/* --- Hide Scrollbars --- */
+scrollbar,
+scrollbar slider {
+    background: transparent;
+    border: none;
+    min-width: 0px;
 }
