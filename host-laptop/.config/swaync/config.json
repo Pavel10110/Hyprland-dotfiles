@@ -6,63 +6,61 @@
   "control-center-layer": "overlay",
   "cssPriority": "application",
   "control-center-margin-top": 12,
-  "control-center-margin-bottom": 16,
+  "control-center-margin-bottom": 12,
   "control-center-margin-right": 12,
-  "control-center-margin-left": 0,
-  "control-center-width": 380,
+  "control-center-margin-left": 12,
+  "control-center-width": 360,
   "fit-to-screen": true,
-
   "widgets": [
+    "title",
+    "dnd",
     "buttons-grid",
     "mpris",
-    "title",
     "notifications"
   ],
-
   "widget-config": {
     "title": {
-      "text": "󰂚  Notifications",
+      "text": "Notifications",
       "clear-all-button": true,
-      "button-text": "󰎟  Clear"
+      "button-text": "Clear all"
     },
     "dnd": {
-      "text": "󰂛  Do Not Disturb"
+      "text": "Do not disturb"
     },
     "mpris": {
-      "image-size": 76
+      "autohide": true,
+      "show-album-art": "when-available"
     },
     "buttons-grid": {
+      "buttons-per-row": 2,
       "actions": [
         {
-          "label": "󰤨",
+          "label": "Wi-Fi",
           "type": "toggle",
           "active": true,
           "command": "sh -c 'if [ \"$SWAYNC_TOGGLE_STATE\" = true ]; then nmcli radio wifi on; else nmcli radio wifi off; fi'",
-          "update-command": "sh -c '[ \"$(nmcli radio wifi)\" = enabled ] && echo true || echo false'"
+          "update-command": "nmcli radio wifi | grep -qx enabled && echo true || echo false"
         },
         {
-          "label": "󰂯",
+          "label": "Bluetooth",
           "type": "toggle",
           "active": true,
           "command": "sh -c 'if [ \"$SWAYNC_TOGGLE_STATE\" = true ]; then bluetoothctl power on; else bluetoothctl power off; fi'",
-          "update-command": "sh -c 'bluetoothctl show | grep -q \"Powered: yes\" && echo true || echo false'"
+          "update-command": "bluetoothctl show | grep -q 'Powered: yes' && echo true || echo false"
         },
         {
-          "label": "󰂛",
-          "type": "toggle",
-          "active": false,
-          "command": "swaync-client -d",
-          "update-command": "swaync-client -D"
-        },
-        {
-          "label": "󰌾",
+          "label": "Lock",
           "command": "hyprlock"
         },
         {
-          "label": "󰤄",
+          "label": "Sleep",
           "command": "systemctl suspend"
         }
       ]
     }
-  }
+  },
+  "notification-window-width": 360,
+  "keyboard-shortcuts": true,
+  "relative-timestamps": true,
+  "text-empty": "All caught up"
 }

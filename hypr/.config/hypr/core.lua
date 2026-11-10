@@ -92,6 +92,8 @@ hl.bind("SUPER + backspace", hl.dsp.exec_cmd(terminal))
 hl.bind("SUPER + E", hl.dsp.exec_cmd(fileManager))
 hl.bind("SUPER + C", hl.dsp.exec_cmd("cliphist list | rofi -dmenu -p \"Clipboard\" | cliphist decode | wl-copy"))
 hl.bind("SUPER + S", hl.dsp.exec_cmd("hyprshot -m region --freeze"))
+-- Notification panel is common to both hosts.
+hl.bind("SUPER + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 hl.bind("SUPER + B", hl.dsp.exec_cmd("pkill -x waybar; waybar"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd("~/.config/scripts/changeWallpaper.sh"))
 hl.bind("SUPER + Q", hl.dsp.window.close())
