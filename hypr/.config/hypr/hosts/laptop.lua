@@ -16,6 +16,9 @@ for i = 0, 9 do
  hl.bind("SUPER + SHIFT + " .. i, hl.dsp.window.move({workspace=tostring(i),follow=true}))
 end
 
+-- Primary dictation toggle, matching the existing PC profile.
+hl.bind("SUPER + V", hl.dsp.exec_cmd("~/.local/share/vexa/bin/vexa-dictate-toggle.sh"))
+
 -- Existing laptop-only notification and resize bindings.
 hl.bind("SUPER + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 hl.bind("SUPER + CTRL + h", hl.dsp.window.resize({x=-150,y=0,relative=true}))
