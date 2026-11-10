@@ -2,9 +2,20 @@
   "modules-right": [
     "custom/button",
     "tray",
+    "custom/keyboard-battery",
+    "custom/jbl-battery",
     "cpu",
     "memory",
     "pulseaudio",
     "clock"
-  ]
+  ],
+  "hyprland/workspaces": {
+    "format": "{icon}{windows}",
+    "format-icons": {
+      "special": "󰌨"
+    }
+  },
+  "network": {
+    "format-wifi": " {essid} ({signalStrength}%)"
+  }
 }

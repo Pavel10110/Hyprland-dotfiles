@@ -1,0 +1,5 @@
+#!/bin/sh
+# Run as the desktop user, not through sudo/root.
+set -eu
+BASE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+exec python3 "$BASE/dotfiles_sync.py" "$@"

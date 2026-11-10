@@ -1,0 +1,8 @@
+hollywood
+hyprshade
+pamtester
+pipes.sh
+python-pywalfox
+uxplay
+walogram-git
+zsh-theme-powerlevel10k-git

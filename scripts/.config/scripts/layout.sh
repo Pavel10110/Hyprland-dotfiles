@@ -10,6 +10,6 @@ eww open layout_osd
 # Wait + move (100% reliable)
 sleep 0.08
 ADDR=$(hyprctl clients -j | jq -r '.[] | select(.class == "Eww") | .address' | head -n1)
-[ -n "$ADDR" ] && hyprctl dispatch movewindowpixel exact $X $Y,address:$ADDR
+[ -n "$ADDR" ] && python3 "$HOME/.config/hypr/compositor-ipc.py" move "$ADDR" "$X" "$Y"
 
 sleep 1.3 && eww close layout_osd &

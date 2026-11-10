@@ -7,7 +7,7 @@ for MON in $(hyprctl monitors -j | jq -r '.[] .name'); do
   # Since we have specific window rules, we just need to launch it.
   
   # NOTE: We use '&' to run in background so the loop continues instantly
-  hyprctl dispatch exec "[monitor $MON] ghostty --class=bonsai -e cbonsai -l -t 0.5 -i -C -W -L 150"
+  python3 "$HOME/.config/hypr/compositor-ipc.py" exec --monitor "$MON" "ghostty --class=org.archyper.bonsai -e cbonsai -l -t 0.5 -i -C -W -L 150"
   
   sleep 0.2
 done

@@ -2,11 +2,9 @@
 aalib
 alsa-utils
 amd-ucode
-antigravity
 apr-util
 arch-install-scripts
 archinstall
-arduino-ide-bin
 awww
 b43-fwcutter
 base
@@ -19,7 +17,6 @@ bluez-utils
 bolt
 brightnessctl
 brltty
-broadcom-wl
 btrfs-progs
 chromium
 cliphist
@@ -27,7 +24,6 @@ clonezilla
 cloud-init
 cmatrix
 darkhttpd
-davinci-resolve-studio
 ddrescue
 dhcpcd
 discord
@@ -44,10 +40,8 @@ egl-wayland
 espeakup
 ethtool
 evtest
-eww
 exfatprogs
 f2fs-tools
-f3
 fastfetch
 fatresize
 ffmpeg4.4
@@ -63,9 +57,8 @@ grim
 grml-zsh-config
 grub
 gst-plugin-pipewire
-gtk2
-gyroflow-bin
 hdparm
+hermes-agent-desktop-bin
 htop
 hyperv
 hypridle
@@ -88,13 +81,11 @@ kitty
 ldns
 less
 lftp
-lib32-nvidia-utils
 lib32-vulkan-icd-loader
 libc++
 libc++abi
 libcaca
 libfido2
-libpng12
 libpulse
 libusb-compat
 libxcrypt-compat
@@ -104,6 +95,7 @@ linux-firmware
 linux-firmware-marvell
 linux-headers
 livecd-sounds
+localsend-bin
 lshw
 lsscsi
 lutris
@@ -139,9 +131,6 @@ noto-fonts-emoji
 npm
 ntfs-3g
 nvidia-container-toolkit
-nvidia-open
-nvidia-settings
-nvidia-utils
 nvme-cli
 obsidian
 open-iscsi
@@ -168,7 +157,6 @@ pipewire-pulse
 playerctl
 podman
 podman-docker
-polkit
 polkit-kde-agent
 ppp
 pptpclient
@@ -180,12 +168,8 @@ python-psutil
 python-pywal
 qbittorrent
 qemu-guest-agent
-qt5-location
 qt5-multimedia
 qt5-quickcontrols2
-qt5-webchannel
-qt5-webengine
-qt5-websockets
 qt5-x11extras
 qt5ct
 qt6-tools
@@ -209,8 +193,8 @@ spotify-launcher
 squashfs-tools
 stow
 sudo
+swaync
 syslinux
-systemd-resolvconf
 tcpdump
 telegram-desktop
 terminus-font
@@ -230,8 +214,6 @@ virtualbox-guest-utils-nox
 vpnc
 waybar
 wget
-whdd
-ggml-vulkan
 whisper-cpp
 wireless-regdb
 wireless_tools
@@ -239,9 +221,7 @@ wireplumber
 wl-clipboard
 wtype
 wvdial
-xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
-xdg-desktop-portal-termfilechooser-hunkyburrito-git
 xfsprogs
 xl2tpd
 xorg-xhost

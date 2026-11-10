@@ -80,7 +80,7 @@ export TERM=xterm-256color
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 
-source $ZSH/oh-my-zsh.sh
+[[ ! -r "$ZSH/oh-my-zsh.sh" ]] || source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
@@ -115,33 +115,31 @@ export EDITOR=nvim
 # &   # Run the process in the background.
 #
 # ( ) # Hide shell job control messages.
-(cat ~/.cache/wal/sequences &)
-
-# Alternative (blocks terminal for 0-3ms)
-cat ~/.cache/wal/sequences
+[[ ! -r ~/.cache/wal/sequences ]] || cat ~/.cache/wal/sequences
 
 # To add support for TTYs this line can be optionally added.
-source ~/.cache/wal/colors-tty.sh
+[[ ! -r ~/.cache/wal/colors-tty.sh ]] || source ~/.cache/wal/colors-tty.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-eval $(thefuck --alias)
+if command -v thefuck >/dev/null 2>&1; then eval "$(thefuck --alias)"; fi
 export PATH="$HOME/.local/bin:$PATH"
 
 
-eval "$(zoxide init --cmd cd zsh)"
+if command -v zoxide >/dev/null 2>&1; then eval "$(zoxide init --cmd cd zsh)"; fi
 
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+if command -v fzf >/dev/null 2>&1; then source <(fzf --zsh); fi
 
 
 # make yazi switch working dir 
 function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	local tmp cwd
+	tmp="$(mktemp -t "yazi-cwd.XXXXXX")" || return
 	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	cwd="$(cat -- "$tmp")"
+	[[ -z "$cwd" || ! -d "$cwd" || "$cwd" == "$PWD" ]] || builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
 
@@ -156,25 +154,16 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 
 
-eval $(keychain --eval --quiet ~/.ssh/archyper)
-
-
-function y() {
-    local tmp
-    tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-
-    yazi "$@" --cwd-file="$tmp"
-
-    if [ -f "$tmp" ]; then
-        local cwd
-        cwd="$(cat "$tmp")"
-        if [ -n "$cwd" ] && [ -d "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-            cd -- "$cwd"
-        fi
+# Preserve the existing PC key name only when that key exists; other hosts can
+# select their own key without copying private material into this repository.
+if command -v keychain >/dev/null 2>&1; then
+    if [[ -n ${ZSH_SSH_KEY:-} && -f "$ZSH_SSH_KEY" ]]; then
+        eval "$(keychain --eval --quiet "$ZSH_SSH_KEY")"
+    elif [[ -f "$HOME/.ssh/archyper" ]]; then
+        eval "$(keychain --eval --quiet "$HOME/.ssh/archyper")"
     fi
+fi
 
-    rm -f -- "$tmp"
-}
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

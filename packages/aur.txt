@@ -1,6 +1,7 @@
-eww
+hermes-agent-desktop-bin
+localsend-bin
 paru
 paru-debug
-whdd
+python-pywal
 yandex-music-bin
 zen-browser-bin

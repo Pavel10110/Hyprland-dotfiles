@@ -8,5 +8,16 @@
     "memory",
     "pulseaudio",
     "clock"
-  ]
+  ],
+  "hyprland/workspaces": {
+    "format": "{id}{windows}",
+    "format-icons": {}
+  },
+  "network": {
+    "interface": "wlan0",
+    "format-wifi": " {signalStrength}%"
+  },
+  "battery": {
+    "bat": "BAT0"
+  }
 }

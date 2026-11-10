@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Hermes Browser
+Comment=Open the visible agent browser and secure tunnel
+Exec=/home/archyper/.local/bin/hermes-browser start
+Icon=chromium
+Terminal=false
+Categories=Network;WebBrowser;
+Actions=Disconnect;
+
+[Desktop Action Disconnect]
+Name=Disconnect agent access
+Exec=/home/archyper/.local/bin/hermes-browser stop

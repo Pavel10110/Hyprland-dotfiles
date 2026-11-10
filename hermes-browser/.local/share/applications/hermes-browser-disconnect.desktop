@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Disconnect Hermes Browser
+Comment=Stop agent access; leave browser open
+Exec=/home/archyper/.local/bin/hermes-browser stop
+Icon=network-disconnect
+Terminal=false
+Categories=Network;

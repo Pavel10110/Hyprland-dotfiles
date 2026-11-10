@@ -1,0 +1,9 @@
+[Unit]
+Description=Hermes visible browser SSH tunnel (manual start)
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ssh -NT -i %h/.ssh/hermes_browser_ed25519 -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ExitOnForwardFailure=yes -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -R 127.0.0.1:9223:127.0.0.1:9222 admin@192.168.20.110
+Restart=always
+RestartSec=5

@@ -12,7 +12,19 @@ githubssh.pub
 *.pfx
 *.ssh
 
-waybar/.config/waybar/scripts
+# Version only the reviewed public helpers; preserve ignored private originals.
+waybar/.config/waybar/scripts/*
+!waybar/.config/waybar/scripts/peripheral_battery.py
+!waybar/.config/waybar/scripts/jbl_reader.py
+!waybar/.config/waybar/scripts/ha_runtime.py
+!waybar/.config/waybar/scripts/pomodoro_runtime.py
+!waybar/.config/waybar/scripts/vexa-light-temp-slider.py
+
+# Per-host generated palette pointer and privately provisioned credentials.
+waybar/.config/waybar/colors.css
+waybar/.config/waybar/private.env
+waybar/.config/waybar/private/
+**/private.env
 
 # Vexa private/runtime data must never enter Git.
 vexa/**/models/

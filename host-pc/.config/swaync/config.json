@@ -9,7 +9,6 @@
   "control-center-margin-bottom": 10,
   "control-center-margin-right": 10,
   "control-center-margin-left": 10,
-  "notification-2d-margin": true,
   "control-center-width": 380,
   "control-center-height": 860,
   "fit-to-screen": false,
@@ -31,8 +30,7 @@
       "text": "Do Not Disturb"
     },
     "mpris": {
-      "image-size": 80,
-      "image-radius": 16
+      "image-size": 80
     }
   }
 }

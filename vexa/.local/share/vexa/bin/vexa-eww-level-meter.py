@@ -2,6 +2,8 @@
 import argparse
 import array
 import math
+import os
+import select
 import signal
 import subprocess
 import sys
@@ -65,11 +67,20 @@ def main():
     visual = IDLE_LEVELS[:]
     last_sent = None
     stream = proc.stdout
-    read_chunk = getattr(stream, "read1", stream.read)
 
     try:
+        # A silent/stalled source must not trap TERM/INT in a restarted read.
+        os.set_blocking(stream.fileno(), False)
         while RUNNING:
-            chunk = read_chunk(BYTES_PER_CHUNK)
+            ready, _, _ = select.select([stream], [], [], 0.1)
+            if not RUNNING:
+                break
+            if not ready:
+                continue
+            try:
+                chunk = os.read(stream.fileno(), BYTES_PER_CHUNK)
+            except BlockingIOError:
+                continue
             if not chunk:
                 break
             if len(chunk) % 2:
@@ -116,15 +127,19 @@ def main():
     finally:
         try:
             proc.terminate()
-        except Exception:
+        except ProcessLookupError:
             pass
         try:
             proc.wait(timeout=1)
-        except Exception:
+        except subprocess.TimeoutExpired:
             try:
                 proc.kill()
-            except Exception:
+            except ProcessLookupError:
                 pass
+            # Killing alone leaves a zombie; reap our capture child as well.
+            proc.wait()
+        finally:
+            stream.close()
 
 
 if __name__ == "__main__":

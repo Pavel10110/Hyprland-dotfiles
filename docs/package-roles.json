@@ -1,0 +1,63 @@
+{
+  "original_package_directories": {
+    "pc": [
+      "back",
+      "docs",
+      "fastfetch",
+      "ghostty",
+      "hermes-browser",
+      "home-assistant",
+      "host-laptop",
+      "host-pc",
+      "hypr",
+      "nvim",
+      "packages",
+      "rofi",
+      "scripts",
+      "swaync",
+      "system",
+      "vexa",
+      "wal",
+      "waybar",
+      "zsh"
+    ],
+    "laptop": [
+      "fastfetch",
+      "host-laptop",
+      "host-pc",
+      "hypr",
+      "nvim",
+      "packages",
+      "rofi",
+      "scripts",
+      "swaync",
+      "wal",
+      "waybar",
+      "zsh"
+    ]
+  },
+  "roles": {
+    "back": "retained historical references; not installed",
+    "docs": "support documentation",
+    "fastfetch": "shared ASCII assets; host-specific configs",
+    "ghostty": "moved into host profiles; no competing shared config",
+    "hermes-browser": "PC-only manual launcher/tunnel; private browser profile and SSH key excluded",
+    "home-assistant": "retained PC-specific integration sources; not installed on laptop",
+    "host-laptop": "laptop overlay only",
+    "host-pc": "PC overlay only",
+    "hypr": "shared Lua/legacy compatibility and host-specific policy",
+    "nvim": "shared",
+    "packages": "package inventories/build source; not an install recipe or Stow package",
+    "rofi": "shared with HOME-relative active assets",
+    "scripts": "shared compatibility-aware scripts",
+    "swaync": "moved into host profiles; distinct appearance retained",
+    "system": "retained PC system templates; no automatic root installation",
+    "vexa": "shared user runtime; models/cache/credentials excluded",
+    "wal": "shared templates; generated palettes remain host-local",
+    "waybar": "shared source and explicit host modules; private/generated runtime excluded",
+    "zsh": "shared shell; distinct host prompt",
+    "tools": "reviewed opt-in deployment/check/rollback tools",
+    "diff": "existing ignored local diagnostic data; not synchronized"
+  },
+  "credentials_models_and_runtime_state": "never shared in Git or blanket-stowed"
+}

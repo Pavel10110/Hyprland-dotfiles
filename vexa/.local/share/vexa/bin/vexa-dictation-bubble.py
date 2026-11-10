@@ -174,10 +174,10 @@ class Bubble(Gtk.Application):
             x = offset_x + (width - self.window_w) // 2
             y = offset_y + height - self.window_h - 56
             for cmd in (
-                ["hyprctl", "dispatch", "setfloating", f"address:{addr}"],
-                ["hyprctl", "dispatch", "resizewindowpixel", f"exact {self.window_w} {self.window_h},address:{addr}"],
-                ["hyprctl", "dispatch", "movewindowpixel", f"exact {x} {y},address:{addr}"],
-                ["hyprctl", "dispatch", "pin", f"address:{addr}"],
+                ["hyprctl", "dispatch", f'hl.dsp.window.float({{window="address:{addr}",action="on"}})'],
+                ["hyprctl", "dispatch", f'hl.dsp.window.resize({{window="address:{addr}",x={self.window_w},y={self.window_h},relative=false}})'],
+                ["hyprctl", "dispatch", f'hl.dsp.window.move({{window="address:{addr}",x={x},y={y},relative=false}})'],
+                ["hyprctl", "dispatch", f'hl.dsp.window.pin({{window="address:{addr}"}})'],
             ):
                 subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             return False

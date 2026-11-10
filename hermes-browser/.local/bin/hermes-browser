@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+"""Manual-start visible browser and supervised SSH tunnel."""
+import fcntl,json,os,pathlib,subprocess,sys,time,urllib.request
+HOME=pathlib.Path.home()
+RUNTIME=pathlib.Path(os.environ.get('XDG_RUNTIME_DIR',f'/run/user/{os.getuid()}'))
+SERVICE='hermes-browser-tunnel.service'
+def service(*args):
+    return subprocess.run(['systemctl','--user',*args],capture_output=True,text=True)
+def notify(text):
+    print(text)
+    subprocess.run(['notify-send','Hermes Browser',text],check=False)
+def healthy():
+    try:
+        with urllib.request.urlopen('http://127.0.0.1:9222/json/version',timeout=2) as r:
+            return 'webSocketDebuggerUrl' in json.load(r)
+    except Exception:
+        return False
+lock=open(RUNTIME/'hermes-browser-launcher.lock','w')
+fcntl.flock(lock,fcntl.LOCK_EX)
+action=sys.argv[1] if len(sys.argv)>1 else 'start'
+if action=='stop':
+    p=service('stop',SERVICE)
+    if p.returncode: sys.exit(p.stderr)
+    notify('Agent tunnel disconnected. Browser and saved profile left intact.')
+    sys.exit(0)
+if action=='status':
+    print('Browser ready:',healthy())
+    print(service('is-active',SERVICE).stdout.strip())
+    sys.exit(0)
+if action!='start': sys.exit('Usage: hermes-browser [start|stop|status]')
+if not healthy():
+    logdir=HOME/'.local/state/hermes-browser'; logdir.mkdir(parents=True,exist_ok=True)
+    with open(logdir/'chromium.log','a') as log:
+        subprocess.Popen(['chromium','--user-data-dir='+str(HOME/'.local/share/hermes-agent-browser'),'--remote-debugging-address=127.0.0.1','--remote-debugging-port=9222','--no-first-run','--no-default-browser-check','about:blank'],stdout=log,stderr=log,start_new_session=True)
+    for _ in range(40):
+        if healthy(): break
+        time.sleep(.25)
+    else:
+        notify('Browser did not become ready. See ~/.local/state/hermes-browser/chromium.log')
+        sys.exit(1)
+p=service('start',SERVICE)
+if p.returncode:
+    notify('Tunnel could not start. Check systemctl --user status '+SERVICE)
+    sys.exit(1)
+time.sleep(2)
+if service('is-active','--quiet',SERVICE).returncode:
+    notify('Tunnel is not ready. Check journalctl --user -u '+SERVICE)
+    sys.exit(1)
+notify('Browser ready; tunnel supervisor started. Ask Hermes to verify the visible browser connection.')

@@ -1,0 +1,15 @@
+hermes-agent-desktop-bin
+hollywood
+hyprshade
+localsend-bin
+pamtester
+paru
+paru-debug
+pipes.sh
+python-pywal
+python-pywalfox
+uxplay
+walogram-git
+yandex-music-bin
+zen-browser-bin
+zsh-theme-powerlevel10k-git

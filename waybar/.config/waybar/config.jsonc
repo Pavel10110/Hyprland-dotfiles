@@ -4,18 +4,13 @@
   "height": 24,
   "spacing": 0,
   "margin-top": 5,
-
-  // Device-specific modules provided by GNU Stow host package
-  "include": ["~/.config/waybar/host.jsonc"],
-
-  // Left
-  "modules-left": ["hyprland/workspaces"],
-
+  "include": [
+    "~/.config/waybar/host.jsonc"
+  ],
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
   "hyprland/workspaces": {
-  "format": "{icon}{windows}",
-  "format-icons": {
-      "special": "󰌨",
-    },
     "show-special": true,
     "format-window-separator": "",
     "window-rewrite-default": "",
@@ -32,23 +27,19 @@
       "class<TradingView>": " "
     }
   },
-
-  // Center
   "modules-center": [
     "custom/temp",
     "custom/notification",
     "custom/pomodoro"
   ],
-
   "custom/temp": {
-    "exec": "~/.config/waybar/scripts/haTemp.sh",
+    "exec": "python3 ~/.config/waybar/scripts/ha_runtime.py temp",
     "return-type": "json",
     "interval": 10,
     "format": " {}",
-    "on-click": "~/.config/waybar/scripts/haopen.sh",
+    "on-click": "python3 ~/.config/waybar/scripts/ha_runtime.py open",
     "tooltip": false
   },
-
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
@@ -65,45 +56,26 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
-
   "custom/pomodoro": {
     "format": "{}",
     "return-type": "json",
-    "exec": "~/.config/waybar/scripts/waybar-module-pomodoro --work 90 -p  -a  -o 󰔛 -b  ",
-    "on-click": "~/.config/waybar/scripts/waybar-module-pomodoro toggle",
-    "on-click-right": "~/.config/waybar/scripts/waybar-module-pomodoro reset"
+    "exec": "python3 ~/.config/waybar/scripts/pomodoro_runtime.py --work 90 -p  -a  -o 󰔛 -b  ",
+    "on-click": "python3 ~/.config/waybar/scripts/pomodoro_runtime.py toggle",
+    "on-click-right": "python3 ~/.config/waybar/scripts/pomodoro_runtime.py reset"
   },
-//<<<<<<< HEAD
-//=======
-//  // Right
-//  "modules-right": [
-//    "custom/button",
-//    "tray",
-//    "custom/keyboard-battery",
-//    "custom/jbl-battery",
-//    "cpu",
-//    "memory",
-//    "pulseaudio",
-//    "clock",
-//  ],
-//>>>>>>> 5baf95e (pc config edits before sync)
-
-  // Module Definitions (Shared by all machines)
   "custom/button": {
-    "exec": "~/.config/waybar/scripts/monLight.sh",
-    "on-click": "~/.config/waybar/scripts/monLight.sh --toggle && pkill -SIGRTMIN+8 waybar",
-    "on-scroll-up": "~/.config/waybar/scripts/monLight.sh --brightness up && pkill -SIGRTMIN+8 waybar",
-    "on-scroll-down": "~/.config/waybar/scripts/monLight.sh --brightness down && pkill -SIGRTMIN+8 waybar",
-    "on-click-right": "~/.config/waybar/scripts/launch_temp_slider.sh",
+    "exec": "python3 ~/.config/waybar/scripts/ha_runtime.py light",
+    "on-click": "python3 ~/.config/waybar/scripts/ha_runtime.py light --toggle && pkill -SIGRTMIN+8 waybar",
+    "on-scroll-up": "python3 ~/.config/waybar/scripts/ha_runtime.py light --brightness up && pkill -SIGRTMIN+8 waybar",
+    "on-scroll-down": "python3 ~/.config/waybar/scripts/ha_runtime.py light --brightness down && pkill -SIGRTMIN+8 waybar",
+    "on-click-right": "python3 ~/.config/waybar/scripts/ha_runtime.py slider",
     "return-type": "json",
     "format": "{}",
     "signal": 8
   },
-
   "tray": {
     "spacing": 10
   },
-
   "battery": {
     "bat": "BAT0",
     "interval": 10,
@@ -115,12 +87,15 @@
     "format-charging": " {capacity}%",
     "format-plugged": " {capacity}%",
     "format-alt": "{icon} {time}",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
-
   "network": {
-    "interface": "wlan0",
-    "format-wifi": " {essid} ({signalStrength}%)",
     "format-ethernet": "󰈀  {ipaddr}/{cidr}",
     "tooltip-format": "{ifname} via {gwaddr}",
     "format-linked": "󰈀  {ifname} (No IP)",
@@ -128,41 +103,39 @@
     "on-click-right": "kitty -e nmtui",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
-
   "custom/keyboard-battery": {
-    "exec": "~/.config/waybar/scripts/keyboard-battery.sh",
+    "exec": "python3 ~/.config/waybar/scripts/peripheral_battery.py keyboard",
     "return-type": "json",
     "interval": 30,
     "format": "{}",
-    "tooltip": true,
+    "tooltip": true
   },
-
   "custom/jbl-battery": {
-    "exec": "~/.local/share/vexa/bin/jbl-quantum-battery.py --waybar",
+    "exec": "python3 ~/.config/waybar/scripts/peripheral_battery.py jbl",
     "return-type": "json",
     "interval": 30,
     "format": "{}",
-    "tooltip": true,
+    "tooltip": true
   },
-
   "cpu": {
     "format": " {usage}%",
     "on-click": "kitty -e htop"
   },
-
   "memory": {
     "format": " {used:0.1f}Gb",
     "on-click": "kitty -e htop"
   },
-
   "pulseaudio": {
     "format": "{icon}{volume}",
     "format-icons": {
-      "default": [" ", " ", " "]
+      "default": [
+        " ",
+        " ",
+        " "
+      ]
     },
     "on-click": "pavucontrol"
   },
-
   "clock": {
     "format": "{:%H:%M}",
     "format-alt": "{:%d.%m.%Y}",
@@ -170,156 +143,3 @@
     "interval": 10
   }
 }
-
-
-
-//{
-//  "layer": "top",
-//  "position": "top",
-//  "height": 24,
-//  "spacing": 0,
-//  "margin-top": 5,
-//
-//  // Left
-//  "modules-left": ["hyprland/workspaces"],
-//
-//  "hyprland/workspaces": {
-//    "format": "{id}{windows}",
-//    "format-icons": {},
-//    "show-special": true,
-//
-//    "format-window-separator": "",
-//    "window-rewrite-default": "",
-//    "window-rewrite": {
-//      "class<kitty> title<.*nvim .*>": " ", //   
-//      "title<.*YouTube.*>": " ",
-//      "class<yandex-music>": " ",
-//      "class<spotify>": " ",
-//      "class<kitty>": " ",
-//      "class<org.telegram.desktop>": " ",
-//      "class<discord>": " ",
-//      "class<obsidian>": " 󱚌",
-//      "class<zen>": " ",
-//      "class<TradingView>": " ",
-//    },
-//  },
-//
-//  // Cente
-//  "modules-center": ["custom/temp", "custom/notification", "custom/pomodoro"],
-//
-//  "custom/temp": {
-//    "exec": "~/.config/waybar/scripts/haTemp.sh",
-//    "return-type": "json",
-//    "interval": 10,
-//    "format": " {}",
-//    "on-click": "~/.config/waybar/scripts/haopen.sh",
-//    "tooltip": false,
-//  },
-//
-//  "custom/pomodoro": {
-//    "format": "{}",
-//    "return-type": "json",
-//    "exec": "~/.config/waybar/scripts/waybar-module-pomodoro --work 90 -p  -a  -o 󰔛 -b  ",
-//    "on-click": "~/.config/waybar/scripts/waybar-module-pomodoro toggle",
-//    "on-click-right": "~/.config/waybar/scripts/waybar-module-pomodoro reset",
-//  },
-//  // Right
-//  "modules-right": [
-//    "custom/button",
-//    "tray",
-//    "battery",
-//    "network",
-//    "cpu",
-//    "memory",
-//    "pulseaudio",
-//    "clock",
-//  ],
-//
-//  "custom/button": {
-//    "exec": "~/.config/waybar/scripts/monLight.sh",
-//    "on-click": "~/.config/waybar/scripts/monLight.sh --toggle && pkill -SIGRTMIN+8 waybar",
-//    "on-scroll-up": "~/.config/waybar/scripts/monLight.sh --brightness up && pkill -SIGRTMIN+8 waybar",
-//    "on-scroll-down": "~/.config/waybar/scripts/monLight.sh --brightness down && pkill -SIGRTMIN+8 waybar",
-//    "on-click-right": "~/.config/waybar/scripts/launch_temp_slider.sh",
-//    "return-type": "json",
-//    "format": "{}",
-//    "signal": 8,
-//  },
-//
-//  "tray": {
-//    "spacing": 10,
-//  },
-//
-//"battery": {
-//    "bat": "BAT0",
-//    "interval": 10,
-//    "states": {
-//        "warning": 30,
-//        "critical": 15
-//    },
-//    "format": "{icon} {capacity}%",
-//    "format-charging": " {capacity}%",
-//    "format-plugged": " {capacity}%",
-//    "format-alt": "{icon} {time}",
-//    "format-icons": ["", "", "", "", ""]
-//},
-//
-//"network": {
-//    "interface": "wlan0", 
-//    "format-wifi": " {essid} ({signalStrength}%)",
-//    "format-ethernet": "󰈀  {ipaddr}/{cidr}",
-//    "tooltip-format": "{ifname} via {gwaddr}",
-//    "format-linked": "󰈀  {ifname} (No IP)",
-//    "format-disconnected": "⚠ Disconnected",
-//    "on-click-right": "kitty -e nmtui",
-//    "format-alt": "{ifname}: {ipaddr}/{cidr}"
-//},
-//  "cpu": {
-//    "format": " {usage}%",
-//    "on-click": "kitty -e htop",
-//  },
-//
-//  "memory": {
-//    //"interval": 30,
-//    "format": " {used:0.1f}Gb",
-//    "on-click": "kitty -e htop",
-//  },
-//
-//  "pulseaudio": {
-//    "format": "{icon}{volume}",
-//    "format-icons": {
-//      "default": [" ", " ", " "],
-//    },
-//"on-click": "pavucontrol",
-//  },
-//
-//  "clock": {
-//    "format": "{:%H:%M}",
-//    "format-alt": "{:%d.%m.%Y}",
-//    "tooltip": false,
-//    "interval": 10,
-//  },
-//
-//"custom/notification": {
-//  "tooltip": false,
-//  "format": "{icon}",
-//  "format-icons": {
-//    "notification": "<span foreground='red'><sup></sup></span>",
-//    "none": "",
-//    "dnd-notification": "<span foreground='red'><sup></sup></span>",
-//    "dnd-none": ""
-//  },
-//  "return-type": "json",
-//  "exec-if": "which swaync-client",
-//  "exec": "swaync-client -swb",
-//  "on-click": "swaync-client -t -sw",
-//  "on-click-right": "swaync-client -d -sw",
-//  "escape": true
-//},
-//}
-//
-//
-//
-//
-//
-//

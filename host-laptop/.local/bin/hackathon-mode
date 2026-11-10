@@ -1,0 +1,198 @@
+#!/usr/bin/python3
+"""Reversible hackathon mode for dedok's thinkDed laptop."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import pwd
+import re
+import tempfile
+import shutil
+import subprocess
+import sys
+import time
+
+USER = 'dedok'
+HOME = Path('/home/dedok')
+BASE = HOME / '.local/state/hackathon-mode'
+CONFIG = HOME / '.config/hypr/hypridle.conf'
+SCRIPT = HOME / '.local/bin/hackathon-mode'
+UNIT = 'hackathon-awake.service'
+UNIT_PATH = Path('/etc/systemd/system') / UNIT
+UNIT_TEXT = '''# Managed by thinkDed hackathon-mode; remove with hackathon-mode off
+[Unit]
+Description=Hackathon keep-awake inhibitor (sleep, idle, lid, suspend key)
+After=systemd-logind.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/systemd-inhibit --what=sleep:idle:handle-lid-switch:handle-suspend-key:handle-hibernate-key --who=Hackathon --why=Reversible-hackathon-mode --mode=block /usr/bin/sleep infinity
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
+'''
+TEMP_CONFIG = '''# Temporary hackathon mode. Original preserved in ~/.local/state/hackathon-mode/.
+# No idle listeners, no automatic lock or display power-off.
+general {
+    lock_cmd = /usr/bin/true
+    before_sleep_cmd = /usr/bin/true
+    after_sleep_cmd = python3 "$HOME/.config/hypr/compositor-ipc.py" dpms on
+}
+'''
+
+def run(*args, check=True, **kw):
+    return subprocess.run(args, check=check, text=True, **kw)
+
+def user_call(action):
+    uid = pwd.getpwnam(USER).pw_uid
+    return run('/usr/sbin/runuser', '-u', USER, '--', '/usr/bin/env',
+               f'XDG_RUNTIME_DIR=/run/user/{uid}',
+               f'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{uid}/bus',
+               str(SCRIPT), action)
+
+def live_env():
+    env = dict(os.environ)
+    result = run('systemctl', '--user', 'show-environment', capture_output=True)
+    for line in result.stdout.splitlines():
+        if '=' in line:
+            k, v = line.split('=', 1)
+            if k in ('WAYLAND_DISPLAY', 'HYPRLAND_INSTANCE_SIGNATURE', 'DISPLAY', 'XDG_CURRENT_DESKTOP'):
+                env[k] = v
+    return env
+
+def stop_idle():
+    run('systemctl', '--user', 'stop', 'hypridle.service', check=False)
+    run('pkill', '-u', str(os.getuid()), '-x', 'hypridle', check=False)
+    for _ in range(30):
+        if run('pgrep', '-u', str(os.getuid()), '-x', 'hypridle', check=False, capture_output=True).returncode:
+            return
+        time.sleep(0.1)
+    raise RuntimeError('hypridle did not stop')
+
+def user_on():
+    BASE.mkdir(parents=True, exist_ok=True, mode=0o700)
+    statefile = BASE / 'state.json'
+    if (BASE / 'active').exists():
+        state = json.loads(statefile.read_text())
+        if CONFIG.resolve() != Path(state['config_target']):
+            raise RuntimeError('Configuration symlink target changed; refusing to overwrite')
+        if CONFIG.read_bytes() != TEMP_CONFIG.encode():
+            raise RuntimeError('Configuration changed during active mode; refusing overwrite')
+    else:
+        assert CONFIG.is_file(), 'Missing original hypridle configuration'
+        shutil.copy2(CONFIG, BASE / 'hypridle.conf.original')
+        state = {
+            'config_target': str(CONFIG.resolve()),
+            'sha256': hashlib.sha256(CONFIG.read_bytes()).hexdigest(),
+            'hypridle_was_running': run('pgrep', '-u', str(os.getuid()), '-x', 'hypridle', check=False, capture_output=True).returncode == 0,
+            'service_was_active': run('systemctl', '--user', 'is-active', '--quiet', 'hypridle.service', check=False).returncode == 0,
+        }
+        statefile.write_text(json.dumps(state, indent=2) + '\n')
+    CONFIG.write_text(TEMP_CONFIG)
+    stop_idle()
+    env = live_env()
+    run('python3', str(HOME / '.config/hypr/compositor-ipc.py'), 'dpms', 'on', env=env)
+    (BASE / 'active').touch()
+    assert CONFIG.read_bytes() == TEMP_CONFIG.encode()
+    print('USER MODE ON: idle locking and display-off disabled. Original backed up.')
+
+def restored_policy(original):
+    """Change only plain, recognized legacy DPMS hooks; preserve policy bytes."""
+    hook = re.compile(rb'^([ \t]*(?:after_sleep_cmd|before_sleep_cmd|lock_cmd|on-timeout|on-resume)[ \t]*=[ \t]*)hyprctl[ \t]+dispatch[ \t]+dpms[ \t]+(on|off)([ \t]*(?:#[^\r\n]*)?)(\r?\n)?$')
+    result = []
+    for line in original.splitlines(keepends=True):
+        match = hook.fullmatch(line)
+        if match:
+            line = (match[1] + b'python3 "$HOME/.config/hypr/compositor-ipc.py" dpms '
+                    + match[2] + match[3] + (match[4] or b''))
+        elif b'hyprctl' in line.split(b'#', 1)[0]:
+            raise RuntimeError('Unsupported legacy hyprctl command in original policy; refusing to guess')
+        result.append(line)
+    return b''.join(result)
+
+
+def user_off():
+    if not (BASE / 'active').exists():
+        print('User configuration already restored; nothing to change.')
+        return
+    state = json.loads((BASE / 'state.json').read_text())
+    if CONFIG.resolve() != Path(state['config_target']):
+        raise RuntimeError('Configuration symlink target changed; refusing to overwrite')
+    if CONFIG.read_bytes() != TEMP_CONFIG.encode():
+        raise RuntimeError('Configuration was edited during hackathon mode; refusing to overwrite')
+    original = (BASE / 'hypridle.conf.original').read_bytes()
+    if hashlib.sha256(original).hexdigest() != state['sha256']:
+        raise RuntimeError('Original backup hash changed; refusing restoration')
+    effective = restored_policy(original)
+    effective_sha = hashlib.sha256(effective).hexdigest()
+    target = CONFIG.resolve()
+    # Atomic replacement preserves original file metadata without touching the golden backup.
+    fd, pending = tempfile.mkstemp(prefix='.hackathon-restore-', dir=target.parent)
+    os.close(fd)
+    try:
+        shutil.copy2(BASE / 'hypridle.conf.original', pending)
+        Path(pending).write_bytes(effective)
+        if hashlib.sha256(Path(pending).read_bytes()).hexdigest() != effective_sha:
+            raise RuntimeError('Effective policy staging hash mismatch')
+        stop_idle()
+        os.replace(pending, target)
+    finally:
+        Path(pending).unlink(missing_ok=True)
+    if hashlib.sha256(CONFIG.read_bytes()).hexdigest() != effective_sha:
+        raise RuntimeError('Written effective policy hash mismatch')
+    if state['hypridle_was_running']:
+        if state['service_was_active']:
+            run('systemctl', '--user', 'start', 'hypridle.service')
+        else:
+            env = live_env()
+            with (BASE / 'restored-hypridle.log').open('a') as log:
+                subprocess.Popen(['/usr/bin/hypridle'], env=env, stdin=subprocess.DEVNULL,
+                                 stdout=log, stderr=log, start_new_session=True)
+        time.sleep(0.5)
+        run('pgrep', '-u', str(os.getuid()), '-x', 'hypridle')
+    (BASE / 'active').unlink()
+    print('RESTORED: original policy with version-compatible IPC and original idle-daemon running state.'
+          if effective != original else
+          'RESTORED: original config byte-for-byte and original idle-daemon running state.')
+
+def main():
+    action = sys.argv[1] if len(sys.argv) > 1 else 'status'
+    if action in ('on', 'off') and os.geteuid() != 0:
+        os.execvp('sudo', ['sudo', str(SCRIPT), action])
+    if action == 'on':
+        if UNIT_PATH.exists() and UNIT_PATH.read_text() != UNIT_TEXT:
+            raise RuntimeError('Existing unrelated system unit; refusing overwrite')
+        UNIT_PATH.write_text(UNIT_TEXT)
+        UNIT_PATH.chmod(0o644)
+        run('systemctl', 'daemon-reload')
+        run('systemctl', 'enable', '--now', UNIT)
+        time.sleep(0.5)
+        run('systemctl', 'is-active', '--quiet', UNIT)
+        user_call('_user-on')
+        run('systemd-inhibit', '--list', '--no-pager')
+        print('FULL HACKATHON MODE ON. Restore with: ~/.local/bin/hackathon-mode off')
+    elif action == 'off':
+        # Restore user config before removing keep-awake protection.
+        user_call('_user-off')
+        if UNIT_PATH.exists():
+            if UNIT_PATH.read_text() != UNIT_TEXT:
+                raise RuntimeError('System unit changed; refusing removal')
+            run('systemctl', 'disable', '--now', UNIT)
+            UNIT_PATH.unlink()
+            run('systemctl', 'daemon-reload')
+        print('HACKATHON MODE OFF. Original settings restored; backups retained.')
+    elif action in ('_user-on', '_user-off'):
+        if os.getuid() != pwd.getpwnam(USER).pw_uid:
+            raise RuntimeError('User actions must run as dedok, never root')
+        (user_on if action == '_user-on' else user_off)()
+    elif action == 'status':
+        print('Idle/display override:', 'ON' if (BASE / 'active').exists() else 'OFF')
+        run('systemctl', 'is-active', UNIT, check=False)
+        run('systemd-inhibit', '--list', '--no-pager')
+    else:
+        raise SystemExit('Usage: hackathon-mode on|off|status')
+
+if __name__ == '__main__':
+    main()

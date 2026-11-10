@@ -14,9 +14,9 @@ return {
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      -- CORRECT: Use vim.lsp.start with a config table
-      vim.lsp.start({
-        name = "lua_ls",
+      -- Let nvim-lspconfig supply cmd, root markers and Lua filetypes.
+      -- Both hosts run Neovim 0.12; do not start a cmd-less client in every buffer.
+      vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         settings = {
           Lua = {
@@ -30,6 +30,7 @@ return {
           }
         }
       })
+      vim.lsp.enable("lua_ls")
 
       vim.keymap.set("n", "gd", vim.lsp.buf.definition)
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
